@@ -1,20 +1,17 @@
 package net.brysonsteck.Resurrection;
 
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class PlayerListener implements Listener {
-
-    @EventHandler
-    public void onJoin() {
-
-    }
 
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
@@ -38,7 +35,17 @@ public class PlayerListener implements Listener {
     public void onPlayerRespawn(PlayerRespawnEvent e) {
         Player p = e.getPlayer();
         p.sendMessage("You have respawned");
-        p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,1000000000, 500));
-        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1000000000, 500));
+        p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,500000, 500));
+        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 500000, 500));
+    }
+
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent e) {
+        Player p = e.getPlayer();
+        Location location = p.getLocation();
+        if (p.getGameMode() == GameMode.SPECTATOR) {
+            p.teleport(location);
+        }
+
     }
 }
