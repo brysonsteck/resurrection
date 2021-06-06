@@ -37,6 +37,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent e) {
         Player p = e.getPlayer();
+        p.sendMessage("You have respawned");
         p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,1000000000, 500));
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1000000000, 500));
     }
