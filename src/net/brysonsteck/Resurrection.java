@@ -19,7 +19,8 @@ public class Resurrection extends JavaPlugin {
     @Override
     public void onEnable() {
         super.onEnable();
-        System.out.println("I'm alive!");
+        System.out.println("Resurrection: I'm alive!");
+        PlayerListener playerListener = new PlayerListener();
     }
 
     // end of spigot things
