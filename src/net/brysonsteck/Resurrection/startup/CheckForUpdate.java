@@ -19,7 +19,7 @@ public class CheckForUpdate {
 
     public CheckForUpdate() {
         try {
-            URL url = new URL("resurrect.brysonsteck.net");
+            URL url = new URL("http://resurrect.brysonsteck.net");
             URLConnection request = url.openConnection();
             request.connect();
             JsonParser json = new JsonParser();
