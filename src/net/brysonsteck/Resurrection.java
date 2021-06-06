@@ -19,6 +19,7 @@ public class Resurrection extends JavaPlugin {
     @Override
     public void onEnable() {
         super.onEnable();
+        this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
         System.out.println("Resurrection: I'm alive!");
         PlayerListener playerListener = new PlayerListener();
     }
