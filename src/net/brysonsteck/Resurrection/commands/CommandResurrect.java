@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffect;
 public class CommandResurrect implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        boolean valid = (strings.length != 1);
+        boolean valid = (strings.length == 1);
         
         if (commandSender instanceof Player) {
             Player p = (Player) commandSender;
