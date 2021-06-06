@@ -20,7 +20,7 @@ public class PlayerListener implements Listener {
     public void onDeath(PlayerDeathEvent e) {
         System.out.println("Resurrection: A player has died!");
         Player p = e.getEntity();
-        p.setGameMode(GameMode.SPECTATOR);
+        p.setGameMode(GameMode.ADVENTURE);
         Long timeOfDeath = System.currentTimeMillis();
         Long resurrectionTime = timeOfDeath + 86400000;
 
