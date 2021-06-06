@@ -1,4 +1,4 @@
-package net.brysonsteck;
+package net.brysonsteck.Resurrection;
 
 import java.io.*;
 import java.util.Arrays;

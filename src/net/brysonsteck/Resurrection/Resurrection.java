@@ -1,14 +1,11 @@
-package net.brysonsteck;
+package net.brysonsteck.Resurrection;
 
-import org.bukkit.event.player.PlayerRespawnEvent;
+import net.brysonsteck.Resurrection.commands.CommandAbout;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.*;
-import java.nio.Buffer;
-
 public class Resurrection extends JavaPlugin {
-//    public Plugin plugin = getPlugin(Resurrection.class);
+    public Plugin plugin = getPlugin(Resurrection.class);
 
     //spigot things
     @Override
@@ -19,9 +16,14 @@ public class Resurrection extends JavaPlugin {
     @Override
     public void onEnable() {
         super.onEnable();
+
+        // register listener
         this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
+
+        // register commands
+        this.getCommand("about").setExecutor(new CommandAbout());
+
         System.out.println("Resurrection: I'm alive!");
-        PlayerListener playerListener = new PlayerListener();
     }
 
     // end of spigot things

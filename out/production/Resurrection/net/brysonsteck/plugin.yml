@@ -1,3 +1,9 @@
 main: net.brysonsteck.Resurrection
 name: Resurrection
-version: alpha 0.0.1
+author: 'Bryson Steck'
+version: '0.0.1 alpha'
+commands:
+  about:
+    description: Displays information about Resurrection.
+    permission: op
+    usage: /about

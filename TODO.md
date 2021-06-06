@@ -1,9 +1,11 @@
 # TODO List
 
+### Done!
+* get the player death event working
+
 ### For first release
 
 * figure out how to get the player.data file to add a user when one joins the server for the first time
-* get the player death event working
 * figure out how to convert milliseconds to an actual date and time for the end user
 * figure out commands and how to use them
     * `about`
