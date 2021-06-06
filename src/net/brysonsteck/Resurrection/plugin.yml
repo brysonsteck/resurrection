@@ -11,3 +11,8 @@ commands:
   timecheck:
     description: Displays the remaining time before the player (or specified player) is resurrected.
     usage: /timecheck [PLAYER NAME]
+
+  resurrect:
+    description: Manually resurrects a player.
+    permission: op
+    usage: /resurrect PLAYER_NAME
