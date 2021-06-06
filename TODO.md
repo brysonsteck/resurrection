@@ -2,11 +2,13 @@
 
 ### Done!
 * get the player death event working
+* figure out how to convert milliseconds to an actual date and time for the end user
+* figure out commands and how to use them
+  * `about`
 
 ### For first release
 
 * figure out how to get the player.data file to add a user when one joins the server for the first time
-* figure out how to convert milliseconds to an actual date and time for the end user
 * figure out commands and how to use them
     * `about`
     * `resurrect PLAYER` (resurrects a player now if needed)

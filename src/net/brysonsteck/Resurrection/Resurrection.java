@@ -1,6 +1,8 @@
 package net.brysonsteck.Resurrection;
 
 import net.brysonsteck.Resurrection.commands.CommandAbout;
+import net.brysonsteck.Resurrection.commands.CommandResurrect;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,8 +24,9 @@ public class Resurrection extends JavaPlugin {
 
         // register commands
         this.getCommand("about").setExecutor(new CommandAbout());
+        this.getCommand("resurrect").setExecutor(new CommandResurrect());
 
-        System.out.println("Resurrection: I'm alive!");
+        System.out.println("[Resurrection] I'm alive!");
     }
 
     // end of spigot things
