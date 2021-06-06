@@ -19,6 +19,7 @@ public class PlayerListener implements Listener {
     public void onDeath(PlayerDeathEvent e) {
         System.out.println("Resurrection: A player has died!");
         Player p = e.getEntity();
+        p.spigot().respawn();
         p.setGameMode(GameMode.SPECTATOR);
         p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,1000000000, 500));
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1000000000, 500));
