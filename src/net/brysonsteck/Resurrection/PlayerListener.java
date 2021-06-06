@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -19,10 +20,7 @@ public class PlayerListener implements Listener {
     public void onDeath(PlayerDeathEvent e) {
         System.out.println("Resurrection: A player has died!");
         Player p = e.getEntity();
-        p.spigot().respawn();
         p.setGameMode(GameMode.SPECTATOR);
-        p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,1000000000, 500));
-        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1000000000, 500));
         Long timeOfDeath = System.currentTimeMillis();
         Long resurrectionTime = timeOfDeath + 86400000;
 
@@ -34,5 +32,12 @@ public class PlayerListener implements Listener {
 
 
         p.sendMessage("You have died! You will be able to respawn in 24 hours.");
+    }
+
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent e) {
+        Player p = e.getPlayer();
+        p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,1000000000, 500));
+        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1000000000, 500));
     }
 }
