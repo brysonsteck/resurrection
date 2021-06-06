@@ -47,7 +47,6 @@ public class Resurrection extends JavaPlugin {
 
     // end of spigot things
     public static void main(String[] args) {
-
 //        PlayerData playerData = new PlayerData();
 //        playerData.saveData("This is the first line\nthis is the second line");
 //        System.out.println(playerData.getPlayers());
