@@ -17,7 +17,7 @@ public class PlayerListener implements Listener {
     public void onDeath(PlayerDeathEvent e) {
         System.out.println("Resurrection: A player has died!");
         Player p = e.getEntity();
-        p.setGameMode(GameMode.ADVENTURE);
+        p.setGameMode(GameMode.SPECTATOR);
         Long timeOfDeath = System.currentTimeMillis();
         Long resurrectionTime = timeOfDeath + 86400000;
 
@@ -27,25 +27,21 @@ public class PlayerListener implements Listener {
         String deathFormatted = death.formatTime();
         String resurrectFormatted = resurrect.formatTime();
 
-
-        p.sendMessage("You have died! You will be able to respawn in 24 hours.");
+        p.sendMessage("You have died!! You will be able to respawn in the next " + resurrectFormatted);
     }
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent e) {
         Player p = e.getPlayer();
-        p.sendMessage("You have respawned");
-        p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,500000, 500));
-        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 500000, 500));
+        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 86400, 255));
     }
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         Location location = p.getLocation();
-        if (p.getGameMode() == GameMode.SPECTATOR) {
+        if (p.getGameMode() == GameMode.SPECTATOR && p.hasPotionEffect(PotionEffectType.BLINDNESS)) {
             p.teleport(location);
         }
-
     }
 }
