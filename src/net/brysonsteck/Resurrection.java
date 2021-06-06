@@ -8,7 +8,7 @@ import java.io.*;
 import java.nio.Buffer;
 
 public class Resurrection extends JavaPlugin {
-    public Plugin plugin = getPlugin(Resurrection.class);
+//    public Plugin plugin = getPlugin(Resurrection.class);
 
     //spigot things
     @Override
@@ -19,7 +19,7 @@ public class Resurrection extends JavaPlugin {
     @Override
     public void onEnable() {
         super.onEnable();
-
+        System.out.println("I'm alive!");
     }
 
     // end of spigot things
