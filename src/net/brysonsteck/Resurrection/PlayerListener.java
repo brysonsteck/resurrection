@@ -1,6 +1,5 @@
 package net.brysonsteck.Resurrection;
 
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -11,10 +10,8 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.plugin.java.JavaPlugin;
 
-
-public class PlayerListener extends JavaPlugin implements Listener {
+public class PlayerListener implements Listener {
 
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
@@ -34,19 +31,13 @@ public class PlayerListener extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent e) {
-        final Player p = e.getPlayer();
+        Player p = e.getPlayer();
         p.setGameMode(GameMode.ADVENTURE);
 
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(getPlugin(Resurrection.class), new Runnable()
-        {
-            public void run()
-            {
-                p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 1728000, 10, false));
-                p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1728000, 10, false));
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 1728000, 10, false));
-                p.setNoDamageTicks(1728000);
-            }
-        }, (1));
+        p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 200, 10, false));
+        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 200, 10, false));
+        p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 10, false));
+        p.setNoDamageTicks(1728000);
     }
 
     @EventHandler
