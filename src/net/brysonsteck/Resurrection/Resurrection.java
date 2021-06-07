@@ -4,11 +4,15 @@ import net.brysonsteck.Resurrection.commands.CommandAbout;
 import net.brysonsteck.Resurrection.commands.CommandResurrect;
 import net.brysonsteck.Resurrection.startup.CheckForUpdate;
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.w3c.dom.stylesheets.LinkStyle;
 
-public class Resurrection extends JavaPlugin {
+import static org.bukkit.Bukkit.getServer;
+
+public class Resurrection extends JavaPlugin implements Listener {
 //    public Plugin plugin = getPlugin(Resurrection.class);
 
     //spigot things
@@ -21,6 +25,7 @@ public class Resurrection extends JavaPlugin {
     public void onEnable() {
         super.onEnable();
         PluginDescriptionFile pluginInfo = getDescription();
+        getServer().getPluginManager().registerEvents(this, this);
 
         // check for updates
         System.out.println("[Resurrection] Checking for updates...");

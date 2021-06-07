@@ -1,5 +1,6 @@
 package net.brysonsteck.Resurrection;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -10,6 +11,8 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import static org.bukkit.Bukkit.getServer;
 
 public class PlayerListener implements Listener {
 
@@ -31,16 +34,22 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent e) {
-        Player p = e.getPlayer();
+        final Player p = e.getPlayer();
         p.setGameMode(GameMode.ADVENTURE);
+        new Thread(() -> {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
+            PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, 200, 10, false);
+            PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 200, 10, false);
+            PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, 200, 10, false);
+            invisibility.apply(p);
+            blindness.apply(p);
+            slowness.apply(p);
+        }).start();
 
-        PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, 200, 10, false);
-        PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 200, 10, false);
-        PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, 200, 10, false);
-        invisibility.apply(p);
-        blindness.apply(p);
-        slowness.apply(p);
-        p.setNoDamageTicks(1728000);
     }
 
     @EventHandler
