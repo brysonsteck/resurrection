@@ -9,7 +9,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Resurrection extends JavaPlugin {
-//    public Plugin plugin = getPlugin(Resurrection.class);
+    public Plugin plugin = getPlugin(Resurrection.class);
 
     //spigot things
     @Override
