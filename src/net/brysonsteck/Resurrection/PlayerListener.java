@@ -33,6 +33,11 @@ public class PlayerListener implements Listener {
     public void onPlayerRespawn(PlayerRespawnEvent e) {
         Player p = e.getPlayer();
         p.setGameMode(GameMode.ADVENTURE);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException interruptedException) {
+            interruptedException.printStackTrace();
+        }
         p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 1728000, 10, false));
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1728000, 10, false));
         p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 1728000, 10, false));
