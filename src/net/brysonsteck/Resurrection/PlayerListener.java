@@ -9,8 +9,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import static org.bukkit.Bukkit.getServer;
 
@@ -36,19 +38,18 @@ public class PlayerListener implements Listener {
     public void onPlayerRespawn(PlayerRespawnEvent e) {
         final Player p = e.getPlayer();
         p.setGameMode(GameMode.ADVENTURE);
-        new Thread(() -> {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException interruptedException) {
-                interruptedException.printStackTrace();
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, 200, 10, false);
+                PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 200, 10, false);
+                PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, 200, 10, false);
+                invisibility.apply(p);
+                blindness.apply(p);
+                slowness.apply(p);
             }
-            PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, 200, 10, false);
-            PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 200, 10, false);
-            PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, 200, 10, false);
-            invisibility.apply(p);
-            blindness.apply(p);
-            slowness.apply(p);
-        }).start();
+        }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 20);
+
 
     }
 
