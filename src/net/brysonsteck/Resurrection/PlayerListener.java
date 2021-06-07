@@ -34,9 +34,12 @@ public class PlayerListener implements Listener {
         Player p = e.getPlayer();
         p.setGameMode(GameMode.ADVENTURE);
 
-        p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 200, 10, false));
-        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 200, 10, false));
-        p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 10, false));
+        PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, 200, 10, false);
+        PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 200, 10, false);
+        PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, 200, 10, false);
+        invisibility.apply(p);
+        blindness.apply(p);
+        slowness.apply(p);
         p.setNoDamageTicks(1728000);
     }
 
