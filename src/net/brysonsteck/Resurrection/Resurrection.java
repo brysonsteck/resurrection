@@ -14,6 +14,7 @@ public class Resurrection extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         super.onDisable();
+        System.out.println("[Resurrection] Resurrection has completed shutdown.");
     }
 
     @Override
@@ -23,17 +24,19 @@ public class Resurrection extends JavaPlugin implements Listener {
         PluginDescriptionFile pluginInfo = getDescription();
         getServer().getPluginManager().registerEvents(this, this);
 
-        // beta message
-        System.out.println("[Resurrection] ---------------------------------------------------------");
-        System.out.println("[Resurrection]                       WARNING!!!!");
-        System.out.println("[Resurrection]      You are running a beta version of Resurrection!");
-        System.out.println("[Resurrection] ");
-        System.out.println("[Resurrection] This means that this plugin is early in development and");
-        System.out.println("[Resurrection] not completely finished, and as a result you may");
-        System.out.println("[Resurrection] experience unexpected doodads. Make sure that the plugin");
-        System.out.println("[Resurrection] is up-to-date for more features and bug fixes. The plugin");
-        System.out.println("[Resurrection] will now check for updates.");
-        System.out.println("[Resurrection] ---------------------------------------------------------");
+        if (pluginInfo.getVersion().contains("beta")) {
+            // beta message
+            System.out.println("[Resurrection] ---------------------------------------------------------");
+            System.out.println("[Resurrection]                       WARNING!!!!");
+            System.out.println("[Resurrection]      You are running a beta version of Resurrection!");
+            System.out.println("[Resurrection] ");
+            System.out.println("[Resurrection] This means that this plugin is early in development and");
+            System.out.println("[Resurrection] not completely finished, and as a result you may");
+            System.out.println("[Resurrection] experience unexpected doodads. Make sure that the plugin");
+            System.out.println("[Resurrection] is up-to-date for more features and bug fixes. The plugin");
+            System.out.println("[Resurrection] will now check for updates.");
+            System.out.println("[Resurrection] ---------------------------------------------------------");
+        }
 
         // check for updates
         System.out.println("[Resurrection] Checking for updates...");

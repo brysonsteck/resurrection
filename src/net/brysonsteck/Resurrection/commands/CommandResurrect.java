@@ -3,6 +3,7 @@ package net.brysonsteck.Resurrection.commands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,6 +27,9 @@ public class CommandResurrect implements CommandExecutor {
                     for (PotionEffect effect : resurrectPlayer.getActivePotionEffects())
                         resurrectPlayer.removePotionEffect(effect.getType());
                     resurrectPlayer.setGameMode(GameMode.SURVIVAL);
+                    for(Player player : Bukkit.getOnlinePlayers()){
+                        player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
+                    }
                     Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + strings[0] + " has been resurrected manually by an admin!");
                     return true;
                 } else {
@@ -48,6 +52,9 @@ public class CommandResurrect implements CommandExecutor {
                     for (PotionEffect effect : resurrectPlayer.getActivePotionEffects())
                         resurrectPlayer.removePotionEffect(effect.getType());
                     resurrectPlayer.setGameMode(GameMode.SURVIVAL);
+                    for(Player player : Bukkit.getOnlinePlayers()){
+                        player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
+                    }
                     Bukkit.broadcastMessage(strings[0] + " has been resurrected manually by an admin!");
                     return true;
                 } else {

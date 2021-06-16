@@ -1,10 +1,7 @@
 package net.brysonsteck.Resurrection.player;
 
 import net.brysonsteck.Resurrection.Resurrection;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -40,6 +37,9 @@ public class PlayerListener implements Listener {
                 for (PotionEffect effect : p.getActivePotionEffects())
                     p.removePotionEffect(effect.getType());
                 p.setGameMode(GameMode.SURVIVAL);
+                for(Player p : Bukkit.getOnlinePlayers()){
+                    p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
+                }
                 Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + p.getDisplayName() + " has resurrected!");
             }
         }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 1728000);
