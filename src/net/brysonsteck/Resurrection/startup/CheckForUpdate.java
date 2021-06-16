@@ -20,8 +20,11 @@ public class CheckForUpdate {
             String json = urlReader();
             JsonElement root = new JsonParser().parse(json);
             JsonObject rootobj = root.getAsJsonObject();
-            version = rootobj.get("current-version").getAsString();
-            versionURL = rootobj.get("release-url").getAsString();
+            JsonElement softwareElement = rootobj.get("resurrection");
+            JsonObject softwareObj = softwareElement.getAsJsonObject();
+            version = softwareObj.get("current-release").toString();
+//            version = rootobj.get("current-version").getAsString();
+//            versionURL = rootobj.get("release-url").getAsString();
         } catch (IOException e) {
             System.out.println("[Resurrection] An error has occurred while attempting to check for updates.");
             e.printStackTrace();
@@ -29,7 +32,7 @@ public class CheckForUpdate {
     }
 
     public String urlReader() throws IOException {
-        URL website = new URL("https://brysonsteck.net/resurrect.json");
+        URL website = new URL("https://brysonsteck.net/updates.json");
         URLConnection connection = website.openConnection();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(

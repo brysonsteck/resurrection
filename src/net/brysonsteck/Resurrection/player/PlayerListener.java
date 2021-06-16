@@ -1,6 +1,7 @@
-package net.brysonsteck.Resurrection;
+package net.brysonsteck.Resurrection.player;
 
-import org.bukkit.Bukkit;
+import net.brysonsteck.Resurrection.Resurrection;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -14,9 +15,9 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import static org.bukkit.Bukkit.getServer;
-
 public class PlayerListener implements Listener {
+
+    Location spawn;
 
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
@@ -24,20 +25,31 @@ public class PlayerListener implements Listener {
         Player p = e.getEntity();
         Long timeOfDeath = System.currentTimeMillis();
         Long resurrectionTime = timeOfDeath + 86400000;
-
-        TimeCheck death = new TimeCheck(timeOfDeath);
-        TimeCheck resurrect = new TimeCheck((timeOfDeath + 86400000) - timeOfDeath);
-
-        String deathFormatted = death.formatTime();
-        String resurrectFormatted = resurrect.formatTime();
+//
+//        TimeCheck death = new TimeCheck(timeOfDeath);
+//        TimeCheck resurrect = new TimeCheck((timeOfDeath + 86400000) - timeOfDeath);
+//
+//        String deathFormatted = death.formatTime();
+//        String resurrectFormatted = resurrect.formatTime();
 
         p.sendMessage("You have died!! You will be able to respawn in the next 24 hours.");
+
+        new Thread (() -> {
+            try {
+                Thread.sleep(86400000);
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+                p.sendMessage("Failed to make the thread sleep!");
+            }
+            ResurrectPlayer resurrectPlayer = new ResurrectPlayer(p);
+        }).start();
     }
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent e) {
         final Player p = e.getPlayer();
-        p.setGameMode(GameMode.ADVENTURE);
+        p.setGameMode(GameMode.SPECTATOR);
+        spawn = p.getLocation();
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -57,8 +69,8 @@ public class PlayerListener implements Listener {
     public void onPlayerMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         Location location = p.getLocation();
-        if (p.getGameMode() == GameMode.ADVENTURE) {
-            p.teleport(location);
+        if (p.getGameMode() == GameMode.SPECTATOR) {
+            p.teleport(spawn);
         }
     }
 }

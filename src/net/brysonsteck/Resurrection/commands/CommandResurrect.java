@@ -44,7 +44,7 @@ public class CommandResurrect implements CommandExecutor {
                     System.out.println("That player does not exist! Failed to resurrect.");
                     return false;
                 }
-                if (resurrectPlayer.getGameMode() == GameMode.ADVENTURE) {
+                if (resurrectPlayer.getGameMode() == GameMode.SPECTATOR) {
                     for (PotionEffect effect : resurrectPlayer.getActivePotionEffects())
                         resurrectPlayer.removePotionEffect(effect.getType());
                     resurrectPlayer.setGameMode(GameMode.SURVIVAL);

@@ -2,15 +2,11 @@ package net.brysonsteck.Resurrection;
 
 import net.brysonsteck.Resurrection.commands.CommandAbout;
 import net.brysonsteck.Resurrection.commands.CommandResurrect;
+import net.brysonsteck.Resurrection.player.PlayerListener;
 import net.brysonsteck.Resurrection.startup.CheckForUpdate;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.w3c.dom.stylesheets.LinkStyle;
-
-import static org.bukkit.Bukkit.getServer;
 
 public class Resurrection extends JavaPlugin implements Listener {
 //    public Plugin plugin = getPlugin(Resurrection.class);
@@ -52,6 +48,7 @@ public class Resurrection extends JavaPlugin implements Listener {
 
     // end of spigot things
     public static void main(String[] args) {
+        CheckForUpdate check = new CheckForUpdate();
 //        PlayerData playerData = new PlayerData();
 //        playerData.saveData("This is the first line\nthis is the second line");
 //        System.out.println(playerData.getPlayers());

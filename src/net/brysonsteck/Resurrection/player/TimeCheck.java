@@ -1,8 +1,8 @@
-package net.brysonsteck.Resurrection;
+package net.brysonsteck.Resurrection.player;
 
 import java.util.concurrent.TimeUnit;
 
-class TimeCheck {
+public class TimeCheck {
     long millis;
 
     public TimeCheck(long millis) {
