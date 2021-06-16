@@ -42,7 +42,7 @@ public class PlayerListener implements Listener {
                 }
                 Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + p.getDisplayName() + " has resurrected!");
             }
-        }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 1728000);
+        }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 200);
     }
 
     @EventHandler
@@ -54,8 +54,8 @@ public class PlayerListener implements Listener {
             public void run() {
                 spawn = p.getLocation();
 //                PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, 1728000, 10, false);
-                PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 1728000, 10, false);
-                PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, 1728000, 10, false);
+                PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 100, 10, false);
+                PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, 100, 10, false);
 //                invisibility.apply(p);
                 blindness.apply(p);
                 slowness.apply(p);
