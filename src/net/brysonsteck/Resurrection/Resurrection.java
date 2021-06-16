@@ -2,11 +2,14 @@ package net.brysonsteck.Resurrection;
 
 import net.brysonsteck.Resurrection.commands.CommandAbout;
 import net.brysonsteck.Resurrection.commands.CommandResurrect;
+import net.brysonsteck.Resurrection.player.PlayerData;
 import net.brysonsteck.Resurrection.player.PlayerListener;
 import net.brysonsteck.Resurrection.startup.CheckForUpdate;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Hashtable;
 
 public class Resurrection extends JavaPlugin implements Listener {
 
@@ -62,6 +65,38 @@ public class Resurrection extends JavaPlugin implements Listener {
         System.out.println("[Resurrection] Successfully Started!");
     }
 
-    public static void main(String[] args) { }
+    public static void main(String[] args) {
+
+        // DO THISgit 
+        PlayerData playerData = new PlayerData();
+        System.out.println("--- Reading Player data file ---");
+        playerData.readData();
+        System.out.println(playerData.getPlayers());
+        System.out.println(playerData.getRawData());
+        System.out.println("--- Oh look! A new player joined. Adding them. ---");
+        playerData.saveData("bryzinga,false,0");
+        System.out.println(playerData.getPlayers());
+        System.out.println(playerData.getRawData());
+        System.out.println("--- A player has died! Update the data file! ---");
+        String rawData = playerData.getRawData();
+        String[] rawPlayers = rawData.split(";");
+        String[] rawSinglePlayer = new String[3];
+        int index = 0;
+        for (String players : rawPlayers) {
+            if (players.startsWith("bryzinga")) {
+                String[] playerSplit = players.split(",");
+                playerSplit[1] = "true";
+                playerSplit[2] = "12345";
+
+                rawPlayers[index] = String.join(",", playerSplit);
+                break;
+
+            }
+            index++;
+        }
+        rawData = String.join(";", rawPlayers);
+        System.out.println(rawData);
+
+    }
 
 }
