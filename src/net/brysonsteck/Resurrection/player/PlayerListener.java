@@ -15,12 +15,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerListener implements Listener {
 
+    boolean stillDead;
     Location spawn;
 
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
         System.out.println("Resurrection: A player has died!");
         Player p = e.getEntity();
+        stillDead = true;
 //
 //        TimeCheck death = new TimeCheck(timeOfDeath);
 //        TimeCheck resurrect = new TimeCheck((timeOfDeath + 86400000) - timeOfDeath);
@@ -34,6 +36,7 @@ public class PlayerListener implements Listener {
             // save death information to player file
             @Override
             public void run() {
+                stillDead = false;
                 for (PotionEffect effect : p.getActivePotionEffects())
                     p.removePotionEffect(effect.getType());
                 p.setGameMode(GameMode.SURVIVAL);
@@ -47,20 +50,23 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent e) {
-        final Player p = e.getPlayer();
-        p.setGameMode(GameMode.SPECTATOR);
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                spawn = p.getLocation();
+        if (stillDead) {
+            final Player p = e.getPlayer();
+            p.setGameMode(GameMode.SPECTATOR);
+            p.sendTitle("You have died!", "You must wait 24 hours before you can respawn.");
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    spawn = p.getLocation();
 //                PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, 1728000, 10, false);
-                PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 100, 10, false);
-                PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, 100, 10, false);
+                    PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 100, 10, false);
+                    PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, 100, 10, false);
 //                invisibility.apply(p);
-                blindness.apply(p);
-                slowness.apply(p);
-            }
-        }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 1);
+                    blindness.apply(p);
+                    slowness.apply(p);
+                }
+            }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 1);
+        }
     }
 
     @EventHandler
