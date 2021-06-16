@@ -25,6 +25,8 @@ public class Resurrection extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         super.onEnable();
+        System.out.println("[Resurrection] ---------------------------------------------------------");
+
         System.out.println("[Resurrection] Resurrection is starting!");
         PluginDescriptionFile pluginInfo = getDescription();
         getServer().getPluginManager().registerEvents(this, this);
@@ -64,7 +66,6 @@ public class Resurrection extends JavaPlugin implements Listener {
 
         System.out.println("[Resurrection] ---------------------------------------------------------");
 
-
         // check for updates
         System.out.println("[Resurrection] Checking for updates...");
         CheckForUpdate check = new CheckForUpdate();
@@ -80,11 +81,11 @@ public class Resurrection extends JavaPlugin implements Listener {
 
         System.out.println("[Resurrection] ---------------------------------------------------------");
 
+        System.out.println("[Resurrection] Registering listeners and adding commands...");
         // register listener
         this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 
         // register commands
-        System.out.println("[Resurrection] Adding commands...");
         this.getCommand("about").setExecutor(new CommandAbout());
         this.getCommand("resurrect").setExecutor(new CommandResurrect());
 
@@ -97,37 +98,37 @@ public class Resurrection extends JavaPlugin implements Listener {
     public static void main(String[] args) {
 
         // DO THIS
-        PlayerData playerData = new PlayerData();
-        System.out.println("--- Reading Player data file ---");
-        playerData.readData();
-        System.out.println(playerData.getPlayers());
-        System.out.println(playerData.getRawData());
-        System.out.println("--- Oh look! A new player joined. Adding them. ---");
-        String rawData = playerData.getRawData();
-        rawData = rawData + ";bryzinga,false,0";
-        playerData.saveData(rawData);
-        System.out.println(playerData.getPlayers());
-        System.out.println(playerData.getRawData());
-        System.out.println("--- A player has died! Update the data file! ---");
-        rawData = playerData.getRawData();
-        String[] rawPlayers = rawData.split(";");
-        String[] rawSinglePlayer = new String[3];
-        int index = 0;
-        for (String players : rawPlayers) {
-            if (players.startsWith("bryzinga")) {
-                String[] playerSplit = players.split(",");
-                playerSplit[1] = "true";
-                playerSplit[2] = "12345";
-
-                rawPlayers[index] = String.join(",", playerSplit);
-                break;
-
-            }
-            index++;
-        }
-        rawData = String.join(";", rawPlayers);
-        playerData.saveData(rawData);
-        System.out.println(rawData);
+//        PlayerData playerData = new PlayerData();
+//        System.out.println("--- Reading Player data file ---");
+//        playerData.readData();
+//        System.out.println(playerData.getPlayers());
+//        System.out.println(playerData.getRawData());
+//        System.out.println("--- Oh look! A new player joined. Adding them. ---");
+//        String rawData = playerData.getRawData();
+//        rawData = rawData + ";bryzinga,false,0";
+//        playerData.saveData(rawData);
+//        System.out.println(playerData.getPlayers());
+//        System.out.println(playerData.getRawData());
+//        System.out.println("--- A player has died! Update the data file! ---");
+//        rawData = playerData.getRawData();
+//        String[] rawPlayers = rawData.split(";");
+//        String[] rawSinglePlayer = new String[3];
+//        int index = 0;
+//        for (String players : rawPlayers) {
+//            if (players.startsWith("bryzinga")) {
+//                String[] playerSplit = players.split(",");
+//                playerSplit[1] = "true";
+//                playerSplit[2] = "12345";
+//
+//                rawPlayers[index] = String.join(",", playerSplit);
+//                break;
+//
+//            }
+//            index++;
+//        }
+//        rawData = String.join(";", rawPlayers);
+//        playerData.saveData(rawData);
+//        System.out.println(rawData);
 
     }
 

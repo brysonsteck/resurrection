@@ -25,7 +25,7 @@ public class PlayerData {
     public void readData() {
         try {
             rawData = "";
-            BufferedReader reader = new BufferedReader(new FileReader("data/playerData.resurrection"));
+            BufferedReader reader = new BufferedReader(new FileReader("playerData.resurrection"));
             String line = "";
             String[] playerData;
             while (true) {
