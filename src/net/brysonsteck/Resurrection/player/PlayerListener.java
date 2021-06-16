@@ -1,6 +1,7 @@
 package net.brysonsteck.Resurrection.player;
 
 import net.brysonsteck.Resurrection.Resurrection;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -33,16 +34,16 @@ public class PlayerListener implements Listener {
 //        String resurrectFormatted = resurrect.formatTime();
 
         p.sendMessage("You have died!! You will be able to respawn in the next 24 hours.");
-
-        new Thread (() -> {
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException interruptedException) {
-                interruptedException.printStackTrace();
-                p.sendMessage("[Resurrection] An error has occurred! Please contact the admin. (Failed to make the thread sleep!)");
+        
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (PotionEffect effect : p.getActivePotionEffects())
+                    p.removePotionEffect(effect.getType());
+                p.setGameMode(GameMode.SURVIVAL);
+                Bukkit.broadcastMessage(p.getDisplayName() + " has been resurrected manually by an admin!");
             }
-            ResurrectPlayer resurrectPlayer = new ResurrectPlayer(p);
-        }).start();
+        }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 200);
     }
 
     @EventHandler

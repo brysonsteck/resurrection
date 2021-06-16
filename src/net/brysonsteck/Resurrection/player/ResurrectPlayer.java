@@ -8,7 +8,7 @@ import org.bukkit.potion.PotionEffect;
 public class ResurrectPlayer {
 
     public ResurrectPlayer(Player p) {
-        p.setGameMode(GameMode.SURVIVAL);
-        Bukkit.broadcastMessage(p.getDisplayName() + " has resurrected!");
-    }
+
+
+          }
 }
