@@ -13,19 +13,19 @@ public class PlayerData {
 
     public void saveData(String write) {
         try {
-            FileWriter writer = new FileWriter("data/player.data");
+            FileWriter writer = new FileWriter("playerData.resurrection");
             writer.write(write);
             writer.close();
-            readData();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        readData();
     }
 
     public void readData() {
         try {
             rawData = "";
-            BufferedReader reader = new BufferedReader(new FileReader("data/player.data"));
+            BufferedReader reader = new BufferedReader(new FileReader("data/playerData.resurrection"));
             String line = "";
             String[] playerData;
             while (true) {

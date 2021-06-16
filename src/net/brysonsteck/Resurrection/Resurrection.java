@@ -9,6 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Hashtable;
 
 public class Resurrection extends JavaPlugin implements Listener {
@@ -39,7 +41,29 @@ public class Resurrection extends JavaPlugin implements Listener {
             System.out.println("[Resurrection] is up-to-date for more features and bug fixes. The plugin");
             System.out.println("[Resurrection] will now check for updates.");
             System.out.println("[Resurrection] ---------------------------------------------------------");
+        } else {
+            System.out.println("[Resurrection] ---------------------------------------------------------");
+
         }
+
+        System.out.println("[Resurrection] Locating the file \"playerData.resurrection\"...");
+        // check if playerData.resurrection exists
+        File playerFile = new File("playerData.resurrection");
+        if (!playerFile.exists()) {
+            System.out.println("[Resurrection] Player data file does not exist. Creating now in the \"plugins\" directory...");
+            try {
+                playerFile.createNewFile();
+                System.out.println("[Resurrection] Player data file created successfully.");
+            } catch (IOException e) {
+                System.out.println("[Resurrection] An error has occurred creating the player data file!");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("[Resurrection] The player data file has been found!");
+        }
+
+        System.out.println("[Resurrection] ---------------------------------------------------------");
+
 
         // check for updates
         System.out.println("[Resurrection] Checking for updates...");
@@ -54,6 +78,8 @@ public class Resurrection extends JavaPlugin implements Listener {
             System.out.println("[Resurrection] " + newestVersionURL);
         }
 
+        System.out.println("[Resurrection] ---------------------------------------------------------");
+
         // register listener
         this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 
@@ -62,7 +88,10 @@ public class Resurrection extends JavaPlugin implements Listener {
         this.getCommand("about").setExecutor(new CommandAbout());
         this.getCommand("resurrect").setExecutor(new CommandResurrect());
 
+        System.out.println("[Resurrection] ---------------------------------------------------------");
         System.out.println("[Resurrection] Successfully Started!");
+        System.out.println("[Resurrection] ---------------------------------------------------------");
+
     }
 
     public static void main(String[] args) {
