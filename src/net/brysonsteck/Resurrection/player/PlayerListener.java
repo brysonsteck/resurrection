@@ -36,7 +36,7 @@ public class PlayerListener implements Listener {
 
         new Thread (() -> {
             try {
-                Thread.sleep(86400000);
+                Thread.sleep(5000);
             } catch (InterruptedException interruptedException) {
                 interruptedException.printStackTrace();
                 p.sendMessage("Failed to make the thread sleep!");

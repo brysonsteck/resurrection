@@ -20,9 +20,11 @@ public class CheckForUpdate {
             String json = urlReader();
             JsonElement root = new JsonParser().parse(json);
             JsonObject rootobj = root.getAsJsonObject();
-            JsonElement softwareElement = rootobj.get("resurrection");
+            JsonElement softwareElement = rootobj.getAsJsonObject("resurrection");
             JsonObject softwareObj = softwareElement.getAsJsonObject();
             version = softwareObj.get("current-release").toString();
+            version = version.replace("\"", "");
+            versionURL = softwareObj.get("github-release").toString();
 //            version = rootobj.get("current-version").getAsString();
 //            versionURL = rootobj.get("release-url").getAsString();
         } catch (IOException e) {
