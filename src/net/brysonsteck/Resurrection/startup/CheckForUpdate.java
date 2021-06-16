@@ -3,10 +3,8 @@ package net.brysonsteck.Resurrection.startup;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
 
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -25,8 +23,6 @@ public class CheckForUpdate {
             version = softwareObj.get("current-release").toString();
             version = version.replace("\"", "");
             versionURL = softwareObj.get("github-release").toString();
-//            version = rootobj.get("current-version").getAsString();
-//            versionURL = rootobj.get("release-url").getAsString();
         } catch (IOException e) {
             System.out.println("[Resurrection] An error has occurred while attempting to check for updates.");
             e.printStackTrace();

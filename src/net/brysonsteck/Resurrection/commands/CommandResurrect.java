@@ -19,22 +19,22 @@ public class CommandResurrect implements CommandExecutor {
             if (valid) {
                 Player resurrectPlayer = Bukkit.getPlayer(strings[0]);
                 if (resurrectPlayer == null) {
-                    p.sendMessage("That player does not exist! Failed to resurrect.");
+                    p.sendMessage(ChatColor.RED + "That player does not exist! Failed to resurrect.");
                     return false;
                 }
                 if (resurrectPlayer.getGameMode() == GameMode.SPECTATOR) {
                     for (PotionEffect effect : resurrectPlayer.getActivePotionEffects())
                         resurrectPlayer.removePotionEffect(effect.getType());
                     resurrectPlayer.setGameMode(GameMode.SURVIVAL);
-                    Bukkit.broadcastMessage(strings[0] + " has been resurrected manually by an admin!");
+                    Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + strings[0] + " has been resurrected manually by an admin!");
                     return true;
                 } else {
-                    p.sendMessage(strings[0] + " is not dead! Failed to resurrect.");
+                    p.sendMessage(ChatColor.RED + strings[0] + " is not dead! Failed to resurrect.");
                     return false;
                 }
             } else {
-                System.out.println("Too few arguments!");
-                System.out.println("Usage: /resurrect PLAYER");
+                System.out.println(ChatColor.RED + "Too few arguments!");
+                System.out.println(ChatColor.RED + "Usage: /resurrect PLAYER");
                 return false;
             }
         } else {

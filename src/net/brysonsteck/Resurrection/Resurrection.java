@@ -9,7 +9,6 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Resurrection extends JavaPlugin implements Listener {
-//    public Plugin plugin = getPlugin(Resurrection.class);
 
     //spigot things
     @Override
@@ -20,8 +19,21 @@ public class Resurrection extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         super.onEnable();
+        System.out.println("[Resurrection] Resurrection is starting!");
         PluginDescriptionFile pluginInfo = getDescription();
         getServer().getPluginManager().registerEvents(this, this);
+
+        // beta message
+        System.out.println("[Resurrection] ---------------------------------------------------------");
+        System.out.println("[Resurrection]                       WARNING!!!!");
+        System.out.println("[Resurrection]      You are running a beta version of Resurrection!");
+        System.out.println("[Resurrection] ");
+        System.out.println("[Resurrection] This means that this plugin is early in development and");
+        System.out.println("[Resurrection] not completely finished, and as a result you may");
+        System.out.println("[Resurrection] experience unexpected doodads. Make sure that the plugin");
+        System.out.println("[Resurrection] is up-to-date for more features and bug fixes. The plugin");
+        System.out.println("[Resurrection] will now check for updates.");
+        System.out.println("[Resurrection] ---------------------------------------------------------");
 
         // check for updates
         System.out.println("[Resurrection] Checking for updates...");
@@ -40,30 +52,13 @@ public class Resurrection extends JavaPlugin implements Listener {
         this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 
         // register commands
+        System.out.println("[Resurrection] Adding commands...");
         this.getCommand("about").setExecutor(new CommandAbout());
         this.getCommand("resurrect").setExecutor(new CommandResurrect());
 
-        System.out.println("[Resurrection] Successfully Started.");
+        System.out.println("[Resurrection] Successfully Started!");
     }
 
-    // end of spigot things
-    public static void main(String[] args) {
-        CheckForUpdate check = new CheckForUpdate();
-//        PlayerData playerData = new PlayerData();
-//        playerData.saveData("This is the first line\nthis is the second line");
-//        System.out.println(playerData.getPlayers());
-//        playerData.readData();
-
-//        playerData.saveData("username,false,0");
-//        System.out.println("now adding two more lines");
-//        playerData.saveData(playerData.getPlayers() + "this is the third line\nthis is the fourth line\nthe thread is now sleeping\nonce more\nand again");
-//        System.out.println(playerData.getPlayers());
-//        try {
-//            Thread.sleep(100000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-
-    }
+    public static void main(String[] args) { }
 
 }
