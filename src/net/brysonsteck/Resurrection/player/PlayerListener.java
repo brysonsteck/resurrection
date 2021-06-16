@@ -39,7 +39,7 @@ public class PlayerListener implements Listener {
                 Thread.sleep(5000);
             } catch (InterruptedException interruptedException) {
                 interruptedException.printStackTrace();
-                p.sendMessage("Failed to make the thread sleep!");
+                p.sendMessage("[Resurrection] An error has occurred! Please contact the admin. (Failed to make the thread sleep!)");
             }
             ResurrectPlayer resurrectPlayer = new ResurrectPlayer(p);
         }).start();
@@ -53,14 +53,14 @@ public class PlayerListener implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, 200, 10, false);
-                PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 200, 10, false);
-                PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, 200, 10, false);
+                PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, 100, 10, false);
+                PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 100, 10, false);
+                PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, 100, 10, false);
                 invisibility.apply(p);
                 blindness.apply(p);
                 slowness.apply(p);
             }
-        }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 20);
+        }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 1);
 
 
     }
