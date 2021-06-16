@@ -67,18 +67,20 @@ public class Resurrection extends JavaPlugin implements Listener {
 
     public static void main(String[] args) {
 
-        // DO THISgit 
+        // DO THIS
         PlayerData playerData = new PlayerData();
         System.out.println("--- Reading Player data file ---");
         playerData.readData();
         System.out.println(playerData.getPlayers());
         System.out.println(playerData.getRawData());
         System.out.println("--- Oh look! A new player joined. Adding them. ---");
-        playerData.saveData("bryzinga,false,0");
+        String rawData = playerData.getRawData();
+        rawData = rawData + ";bryzinga,false,0";
+        playerData.saveData(rawData);
         System.out.println(playerData.getPlayers());
         System.out.println(playerData.getRawData());
         System.out.println("--- A player has died! Update the data file! ---");
-        String rawData = playerData.getRawData();
+        rawData = playerData.getRawData();
         String[] rawPlayers = rawData.split(";");
         String[] rawSinglePlayer = new String[3];
         int index = 0;
@@ -95,6 +97,7 @@ public class Resurrection extends JavaPlugin implements Listener {
             index++;
         }
         rawData = String.join(";", rawPlayers);
+        playerData.saveData(rawData);
         System.out.println(rawData);
 
     }

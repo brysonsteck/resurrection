@@ -14,7 +14,7 @@ public class PlayerData {
     public void saveData(String write) {
         try {
             FileWriter writer = new FileWriter("data/player.data");
-            writer.write(rawData + ";" + write);
+            writer.write(write);
             writer.close();
             readData();
         } catch (IOException e) {

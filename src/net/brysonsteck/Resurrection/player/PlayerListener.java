@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,6 +20,69 @@ public class PlayerListener implements Listener {
     Location spawn;
 
     @EventHandler
+    public void onJoin(PlayerJoinEvent e) {
+        Player p = e.getPlayer();
+        PlayerData playerData = new PlayerData();
+        playerData.readData();
+        String rawData = playerData.getRawData();
+        String[] rawPlayers = rawData.split(";");
+        int index = 0;
+        boolean found = false;
+        boolean resumeDeath = false;
+        long resurrectTime = 0;
+        for (String players : rawPlayers) {
+            if (players.startsWith(p.getDisplayName())) {
+                found = true;
+                String[] playerSplit = players.split(",");
+                boolean dead = Boolean.parseBoolean(playerSplit[1]);
+                resurrectTime = Long.parseLong(playerSplit[2]);
+
+                if (p.getGameMode() == GameMode.SPECTATOR && !dead) {
+                    for (PotionEffect effect : p.getActivePotionEffects())
+                        p.removePotionEffect(effect.getType());
+                    p.setGameMode(GameMode.SURVIVAL);
+                } else if (p.getGameMode() == GameMode.SPECTATOR && dead) {
+                    resumeDeath = true;
+                }
+
+                // save data
+                rawPlayers[index] = String.join(",", playerSplit);
+                rawData = String.join(";", rawPlayers);
+                playerData.saveData(rawData);
+                break;
+            }
+            index++;
+        }
+        if (!found) {
+            playerData.saveData(rawData + ";" + p.getDisplayName() + ",false,0");
+        }
+        if (resumeDeath) {
+            PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 999999999, 10, false);
+            PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, 999999999, 10, false);
+            blindness.apply(p);
+            slowness.apply(p);
+            // convert to seconds and to ticks
+            resurrectTime = resurrectTime - System.currentTimeMillis();
+            resurrectTime = resurrectTime / 1000;
+            resurrectTime = resurrectTime * 20;
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    stillDead = false;
+                    for (PotionEffect effect : p.getActivePotionEffects())
+                        p.removePotionEffect(effect.getType());
+                    p.setGameMode(GameMode.SURVIVAL);
+                    for(Player p : Bukkit.getOnlinePlayers()){
+                        p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
+                    }
+                    Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + p.getDisplayName() + " has resurrected!");
+                }
+            }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), resurrectTime);
+        }
+
+    }
+
+    @EventHandler
     public void onDeath(PlayerDeathEvent e) {
         System.out.println("Resurrection: A player has died!");
         Player p = e.getEntity();
@@ -29,13 +93,55 @@ public class PlayerListener implements Listener {
 //
 //        String deathFormatted = death.formatTime();
 //        String resurrectFormatted = resurrect.formatTime();
+        long timeOfDeath = System.currentTimeMillis();
+        long resurrectionTime = System.currentTimeMillis() + 86400000;
 
         p.sendMessage("You have died!! You will be able to respawn in the next 24 hours.");
+
+        // save death state
+        PlayerData playerData = new PlayerData();
+        playerData.readData();
+        String rawData = playerData.getRawData();
+        String[] rawPlayers = rawData.split(";");
+        int index = 0;
+        boolean found = false;
+        for (String players : rawPlayers) {
+            if (players.startsWith(p.getDisplayName())) {
+                found = true;
+                String[] playerSplit = players.split(",");
+                playerSplit[1] = "true";
+                playerSplit[2] = String.valueOf(resurrectionTime);
+
+                // save data
+                rawPlayers[index] = String.join(",", playerSplit);
+                rawData = String.join(";", rawPlayers);
+                playerData.saveData(rawData);
+                break;
+            }
+            index++;
+        }
+
 
         new BukkitRunnable() {
             // save death information to player file
             @Override
             public void run() {
+                // save death to false
+                String rawData = playerData.getRawData();
+                int index = 0;
+                for (String players : rawPlayers) {
+                    if (players.startsWith(p.getDisplayName())) {
+                        String[] playerSplit = players.split(",");
+                        playerSplit[1] = "false";
+                        playerSplit[2] = "0";
+
+                        rawPlayers[index] = String.join(",", playerSplit);
+                        rawData = String.join(";", rawPlayers);
+                        playerData.saveData(rawData);
+                        break;
+                    }
+                    index++;
+                }
                 stillDead = false;
                 for (PotionEffect effect : p.getActivePotionEffects())
                     p.removePotionEffect(effect.getType());
