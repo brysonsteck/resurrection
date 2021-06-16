@@ -49,7 +49,7 @@ public class PlayerListener implements Listener {
     public void onPlayerRespawn(PlayerRespawnEvent e) {
         final Player p = e.getPlayer();
         p.setGameMode(GameMode.SPECTATOR);
-        this.spawn = p.getBedSpawnLocation();
+        this.spawn = p.getLocation();
         new BukkitRunnable() {
             @Override
             public void run() {
