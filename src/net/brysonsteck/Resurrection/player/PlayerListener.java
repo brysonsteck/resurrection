@@ -49,10 +49,10 @@ public class PlayerListener implements Listener {
     public void onPlayerRespawn(PlayerRespawnEvent e) {
         final Player p = e.getPlayer();
         p.setGameMode(GameMode.SPECTATOR);
-        this.spawn = p.getLocation();
         new BukkitRunnable() {
             @Override
             public void run() {
+                spawn = p.getLocation();
 //                PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, 1728000, 10, false);
                 PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 1728000, 10, false);
                 PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, 1728000, 10, false);
