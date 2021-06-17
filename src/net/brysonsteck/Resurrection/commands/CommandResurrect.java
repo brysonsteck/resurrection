@@ -1,5 +1,6 @@
 package net.brysonsteck.Resurrection.commands;
 
+import net.brysonsteck.Resurrection.player.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -31,6 +32,7 @@ public class CommandResurrect implements CommandExecutor {
                         player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
                     }
                     Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + strings[0] + " has been resurrected manually by an admin!");
+                    removeDeath(resurrectPlayer);
                     return true;
                 } else {
                     p.sendMessage(ChatColor.RED + strings[0] + " is not dead! Failed to resurrect.");
@@ -56,6 +58,7 @@ public class CommandResurrect implements CommandExecutor {
                         player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
                     }
                     Bukkit.broadcastMessage(strings[0] + " has been resurrected manually by an admin!");
+                    removeDeath(resurrectPlayer);
                     return true;
                 } else {
                     System.out.println(strings[0] + " is not dead! Failed to resurrect.");
@@ -66,6 +69,28 @@ public class CommandResurrect implements CommandExecutor {
                 System.out.println("Usage: /resurrect PLAYER");
                 return false;
             }
+        }
+    }
+
+    public void removeDeath(Player p) {
+        PlayerData playerData = new PlayerData();
+        playerData.readData();
+        String rawData = playerData.getRawData();
+        String[] rawPlayers = rawData.split(";");
+        int index = 0;
+        for (String players : rawPlayers) {
+            if (players.startsWith(p.getDisplayName())) {
+                String[] playerSplit = players.split(",");
+                playerSplit[1] = "false";
+                playerSplit[2] = "0";
+
+                // save data
+                rawPlayers[index] = String.join(",", playerSplit);
+                rawData = String.join(";", rawPlayers);
+                playerData.saveData(rawData);
+                break;
+            }
+            index++;
         }
     }
 }

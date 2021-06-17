@@ -37,11 +37,11 @@ public class PlayerListener implements Listener {
                 boolean dead = Boolean.parseBoolean(playerSplit[1]);
                 resurrectTime = Long.parseLong(playerSplit[2]);
 
-                if (p.getGameMode() == GameMode.SPECTATOR && !dead) {
+                if (!dead) {
                     for (PotionEffect effect : p.getActivePotionEffects())
                         p.removePotionEffect(effect.getType());
                     p.setGameMode(GameMode.SURVIVAL);
-                } else if (p.getGameMode() == GameMode.SPECTATOR && dead) {
+                } else {
                     resumeDeath = true;
                 }
 
@@ -57,14 +57,21 @@ public class PlayerListener implements Listener {
             playerData.saveData(rawData + ";" + p.getDisplayName() + ",false,0");
         }
         if (resumeDeath) {
-            PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 999999999, 10, false);
-            PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, 999999999, 10, false);
-            blindness.apply(p);
-            slowness.apply(p);
-            // convert to seconds and to ticks
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    p.setGameMode(GameMode.SPECTATOR);
+                    PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 999999999, 10, false);
+                    PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, 999999999, 10, false);
+                    blindness.apply(p);
+                    slowness.apply(p);
+                    // convert to seconds and to ticks
+                }
+            }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 1);
             resurrectTime = resurrectTime - System.currentTimeMillis();
             resurrectTime = resurrectTime / 1000;
             resurrectTime = resurrectTime * 20;
+
             new BukkitRunnable() {
                 @Override
                 public void run() {

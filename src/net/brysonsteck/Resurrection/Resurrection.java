@@ -129,6 +129,8 @@ public class Resurrection extends JavaPlugin implements Listener {
 //        rawData = String.join(";", rawPlayers);
 //        playerData.saveData(rawData);
 //        System.out.println(rawData);
+//        String[] array = ";bryzinga,false,0".split(";");
+//        System.out.println(array.length);
 
     }
 
