@@ -57,6 +57,7 @@ public class PlayerListener implements Listener {
             playerData.saveData(rawData + ";" + p.getDisplayName() + ",false,0");
         }
         if (resumeDeath) {
+            spawn = p.getLocation();
             new BukkitRunnable() {
                 @Override
                 public void run() {
