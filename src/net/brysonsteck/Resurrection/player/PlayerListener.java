@@ -17,6 +17,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class PlayerListener implements Listener {
 
     boolean stillDead;
+    boolean timerRunning = false;
     Location spawn;
 
     @EventHandler
@@ -56,7 +57,7 @@ public class PlayerListener implements Listener {
         if (!found) {
             playerData.saveData(rawData + ";" + p.getDisplayName() + ",false,0");
         }
-        if (resumeDeath) {
+        if (resumeDeath && !timerRunning) {
             spawn = p.getLocation();
             new BukkitRunnable() {
                 @Override
@@ -105,6 +106,7 @@ public class PlayerListener implements Listener {
         long resurrectionTime = System.currentTimeMillis() + 86400000;
 
         p.sendMessage("You have died!! You will be able to respawn in the next 24 hours.");
+        timerRunning = true;
 
         // save death state
         PlayerData playerData = new PlayerData();
