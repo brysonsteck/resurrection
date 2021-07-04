@@ -10,6 +10,7 @@ import java.net.URLConnection;
 
 
 public class CheckForUpdate {
+    boolean success;
     String version;
     String versionURL;
 
@@ -23,6 +24,7 @@ public class CheckForUpdate {
             version = softwareObj.get("current-release").toString();
             version = version.replace("\"", "");
             versionURL = softwareObj.get("github-release").toString();
+            success = true;
         } catch (IOException e) {
             System.out.println("[Resurrection] An error has occurred while attempting to check for updates.");
             e.printStackTrace();
@@ -46,6 +48,8 @@ public class CheckForUpdate {
 
         return response.toString();
     }
+
+    public boolean isSuccess() { return success; }
 
     public String getVersionURL() {
         return versionURL;

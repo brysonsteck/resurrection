@@ -1,14 +1,28 @@
 package net.brysonsteck.Resurrection.commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class CommandAbout implements CommandExecutor {
+    String currentVersion;
+    boolean checked = false;
+
+    public CommandAbout(String currentVersion) {
+        this.currentVersion = currentVersion;
+    }
+
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        String aboutMessage = "This is the about message for Resurrection.";
+        String aboutMessage = ChatColor.GREEN + "" + ChatColor.BOLD + "Resurrection\n\n" + ChatColor.RESET +
+                "Resurrection is a Spigot Minecraft plugin that forces players to wait 24 hours before respawning.\n" +
+                "The current version of this plugin is " + currentVersion + ".\n\n" +
+                "This plugin is licensed under the GNU Affero General Public License v3.0. Read more here: " +
+                "For more information on this plugin or to download it for yourself, visit the GitHub repository at https://github.com/brysonsteck/resurrection" +
+                "\u00a9 2021 Bryson Steck.";
+
         if (commandSender instanceof Player) {
             Player p = (Player) commandSender;
             p.sendMessage(aboutMessage);

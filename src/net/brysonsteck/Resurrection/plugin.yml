@@ -8,9 +8,9 @@ commands:
     permission: op
     usage: /about
 
-  timecheck:
+  howlong:
     description: Displays the remaining time before the player (or specified player) is resurrected.
-    usage: /timecheck [PLAYER NAME]
+    usage: /howlong [PLAYER_NAME]
 
   resurrect:
     description: Manually resurrects a player.

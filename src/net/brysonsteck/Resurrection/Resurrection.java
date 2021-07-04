@@ -1,8 +1,8 @@
 package net.brysonsteck.Resurrection;
 
 import net.brysonsteck.Resurrection.commands.CommandAbout;
+import net.brysonsteck.Resurrection.commands.CommandHowLong;
 import net.brysonsteck.Resurrection.commands.CommandResurrect;
-import net.brysonsteck.Resurrection.player.PlayerData;
 import net.brysonsteck.Resurrection.player.PlayerListener;
 import net.brysonsteck.Resurrection.startup.CheckForUpdate;
 import org.bukkit.event.Listener;
@@ -11,7 +11,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Hashtable;
 
 public class Resurrection extends JavaPlugin implements Listener {
 
@@ -69,14 +68,16 @@ public class Resurrection extends JavaPlugin implements Listener {
         // check for updates
         System.out.println("[Resurrection] Checking for updates...");
         CheckForUpdate check = new CheckForUpdate();
-        String newestVersion = check.getVersion();
-        String newestVersionURL = check.getVersionURL();
-        if (pluginInfo.getVersion().equals(newestVersion)) {
-            System.out.println("[Resurrection] " + newestVersion + " is the latest version of Resurrection.");
-        } else {
-            System.out.println("[Resurrection] A new version of Resurrection is available! (current: " + pluginInfo.getVersion() + ", newest: " + newestVersion);
-            System.out.println("[Resurrection] You can download the latest release on GitHub here \\/");
-            System.out.println("[Resurrection] " + newestVersionURL);
+        if (check.isSuccess()) {
+            String newestVersion = check.getVersion();
+            String newestVersionURL = check.getVersionURL();
+            if (pluginInfo.getVersion().equals(newestVersion)) {
+                System.out.println("[Resurrection] " + newestVersion + " is the latest version of Resurrection.");
+            } else {
+                System.out.println("[Resurrection] A new version of Resurrection is available! (current: " + pluginInfo.getVersion() + ", newest: " + newestVersion);
+                System.out.println("[Resurrection] You can download the latest release on GitHub here \\/");
+                System.out.println("[Resurrection] " + newestVersionURL);
+            }
         }
 
         System.out.println("[Resurrection] ---------------------------------------------------------");
@@ -86,8 +87,9 @@ public class Resurrection extends JavaPlugin implements Listener {
         this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 
         // register commands
-        this.getCommand("about").setExecutor(new CommandAbout());
+        this.getCommand("about").setExecutor(new CommandAbout(pluginInfo.getVersion()));
         this.getCommand("resurrect").setExecutor(new CommandResurrect());
+        this.getCommand("howlong").setExecutor(new CommandHowLong());
 
         System.out.println("[Resurrection] ---------------------------------------------------------");
         System.out.println("[Resurrection] Successfully Started!");
