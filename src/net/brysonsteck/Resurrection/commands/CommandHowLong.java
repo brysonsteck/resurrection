@@ -73,7 +73,7 @@ public class CommandHowLong implements CommandExecutor {
 
                 Player p = Bukkit.getPlayer(strings[0]);
                 if (p == null) {
-                    commandSender.sendMessage(ChatColor.RED + "ERROR: Player does not exist or is offline!");
+                    System.out.println(ChatColor.RED + "[Resurrection] ERROR: Player does not exist or is offline!");
                     return false;
                 }
 
@@ -90,13 +90,13 @@ public class CommandHowLong implements CommandExecutor {
 
                             TimeCheck timeCheck = new TimeCheck(resurrectionTime - currentTime);
 
-                            commandSender.sendMessage(p.getDisplayName() + " will respawn in " + timeCheck.formatTime());
+                            System.out.println("[Resurrection] " + p.getDisplayName() + " will respawn in " + timeCheck.formatTime());
 
                             return true;
                         }
                     }
                 }
-                commandSender.sendMessage("ERROR: An error has occurred while trying to get time information. This is a bug in the program and not your fault.");
+                System.out.println("[Resurrection] ERROR: An error has occurred while trying to get time information. This is a bug in the program and not your fault.");
                 return false;
             }
         }

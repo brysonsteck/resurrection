@@ -4,6 +4,7 @@ import net.brysonsteck.Resurrection.commands.CommandAbout;
 import net.brysonsteck.Resurrection.commands.CommandHowLong;
 import net.brysonsteck.Resurrection.commands.CommandResurrect;
 import net.brysonsteck.Resurrection.player.PlayerListener;
+import net.brysonsteck.Resurrection.player.TimeCheck;
 import net.brysonsteck.Resurrection.startup.CheckForUpdate;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -68,6 +69,7 @@ public class Resurrection extends JavaPlugin implements Listener {
         // check for updates
         System.out.println("[Resurrection] Checking for updates...");
         CheckForUpdate check = new CheckForUpdate();
+        boolean outdated = false;
         if (check.isSuccess()) {
             String newestVersion = check.getVersion();
             String newestVersionURL = check.getVersionURL();
@@ -77,6 +79,7 @@ public class Resurrection extends JavaPlugin implements Listener {
                 System.out.println("[Resurrection] A new version of Resurrection is available! (current: " + pluginInfo.getVersion() + ", newest: " + newestVersion);
                 System.out.println("[Resurrection] You can download the latest release on GitHub here \\/");
                 System.out.println("[Resurrection] " + newestVersionURL);
+                outdated = true;
             }
         }
 
@@ -87,7 +90,7 @@ public class Resurrection extends JavaPlugin implements Listener {
         this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 
         // register commands
-        this.getCommand("about").setExecutor(new CommandAbout(pluginInfo.getVersion()));
+        this.getCommand("about").setExecutor(new CommandAbout(pluginInfo.getVersion(), outdated));
         this.getCommand("resurrect").setExecutor(new CommandResurrect());
         this.getCommand("howlong").setExecutor(new CommandHowLong());
 
@@ -133,6 +136,9 @@ public class Resurrection extends JavaPlugin implements Listener {
 //        System.out.println(rawData);
 //        String[] array = ";bryzinga,false,0".split(";");
 //        System.out.println(array.length);
+
+        TimeCheck timeCheck = new TimeCheck((System.currentTimeMillis() + 86400000) - System.currentTimeMillis());
+        System.out.println(timeCheck.formatTime());
 
     }
 
