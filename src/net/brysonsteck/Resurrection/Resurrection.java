@@ -137,7 +137,7 @@ public class Resurrection extends JavaPlugin implements Listener {
 //        String[] array = ";bryzinga,false,0".split(";");
 //        System.out.println(array.length);
 
-        TimeCheck timeCheck = new TimeCheck((System.currentTimeMillis() + 86400000) - System.currentTimeMillis());
+        TimeCheck timeCheck = new TimeCheck((System.currentTimeMillis() + 86212345) - System.currentTimeMillis());
         System.out.println(timeCheck.formatTime());
 
     }

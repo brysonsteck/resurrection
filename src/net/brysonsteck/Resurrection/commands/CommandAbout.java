@@ -37,7 +37,7 @@ public class CommandAbout implements CommandExecutor {
                 p.sendMessage("");
             }
             p.sendMessage(ChatColor.YELLOW + "\u00a9 2021 Bryson Steck");
-            p.sendMessage(ChatColor.YELLOW + "This plugin is licensed under the GNU Affero General Public License v3.0. Read more here: ");
+            p.sendMessage(ChatColor.YELLOW + "This plugin is licensed under the GNU Affero General Public License v3.0. Read more here: https://www.gnu.org/licenses/agpl-3.0.en.html");
             p.sendMessage(ChatColor.YELLOW + "For more information on this plugin or to download it for yourself, visit the GitHub repository at https://github.com/brysonsteck/resurrection");
         } else {
             System.out.println(aboutMessage);

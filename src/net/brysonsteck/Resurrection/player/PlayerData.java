@@ -13,7 +13,7 @@ public class PlayerData {
 
     public void saveData(String write) {
         try {
-            FileWriter writer = new FileWriter("playerData.resurrection");
+            FileWriter writer = new FileWriter("plugins/playerData.resurrection");
             writer.write(write);
             writer.close();
         } catch (IOException e) {
@@ -25,7 +25,7 @@ public class PlayerData {
     public void readData() {
         try {
             rawData = "";
-            BufferedReader reader = new BufferedReader(new FileReader("playerData.resurrection"));
+            BufferedReader reader = new BufferedReader(new FileReader("plugins/playerData.resurrection"));
             String line = "";
             String[] playerData;
             while (true) {
