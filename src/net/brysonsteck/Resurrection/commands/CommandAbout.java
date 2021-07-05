@@ -1,6 +1,5 @@
 package net.brysonsteck.Resurrection.commands;
 
-import net.brysonsteck.Resurrection.startup.CheckForUpdate;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

@@ -1,10 +1,7 @@
 package net.brysonsteck.Resurrection.player;
 
-import net.brysonsteck.Resurrection.Resurrection;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.Hashtable;
 
 public class PlayerData {
@@ -26,10 +23,9 @@ public class PlayerData {
         try {
             rawData = "";
             BufferedReader reader = new BufferedReader(new FileReader("plugins/playerData.resurrection"));
-            String line = "";
+            String line;
             String[] playerData;
             while (true) {
-                playerData = new String[3];
                 line = reader.readLine();
                 if (line == null) {
                     break;
@@ -46,9 +42,9 @@ public class PlayerData {
         }
     }
 
-    public Hashtable<String, Hashtable<String, String>> getPlayers() {
-        return playerData;
-    }
+//    public Hashtable<String, Hashtable<String, String>> getPlayers() {
+//        return playerData;
+//    }
 
     public String getRawData() {
         return rawData;

@@ -59,6 +59,8 @@ public class PlayerListener implements Listener {
         }
         if (resumeDeath && !timerRunning) {
             spawn = p.getLocation();
+            p.sendMessage(ChatColor.RED + "You are still dead. To check how long you have left before you are resurrected, " +
+                    "run \"howlong\" in chat.");
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -71,7 +73,9 @@ public class PlayerListener implements Listener {
                 }
             }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 1);
             resurrectTime = resurrectTime - System.currentTimeMillis();
+            // to seconds
             resurrectTime = resurrectTime / 1000;
+            // to ticks
             resurrectTime = resurrectTime * 20;
 
             new BukkitRunnable() {
@@ -102,7 +106,7 @@ public class PlayerListener implements Listener {
 //
 //        String deathFormatted = death.formatTime();
 //        String resurrectFormatted = resurrect.formatTime();
-        long timeOfDeath = System.currentTimeMillis();
+//        long timeOfDeath = System.currentTimeMillis();
         long resurrectionTime = System.currentTimeMillis() + 86400000;
 
         p.sendMessage("You have died!! You will be able to respawn in the next 24 hours.");
@@ -114,10 +118,8 @@ public class PlayerListener implements Listener {
         String rawData = playerData.getRawData();
         String[] rawPlayers = rawData.split(";");
         int index = 0;
-        boolean found = false;
         for (String players : rawPlayers) {
             if (players.startsWith(p.getDisplayName())) {
-                found = true;
                 String[] playerSplit = players.split(",");
                 playerSplit[1] = "true";
                 playerSplit[2] = String.valueOf(resurrectionTime);
@@ -169,7 +171,8 @@ public class PlayerListener implements Listener {
         if (stillDead) {
             final Player p = e.getPlayer();
             p.setGameMode(GameMode.SPECTATOR);
-            p.sendTitle("You have died!", "You must wait 24 hours before you can respawn.");
+            p.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "YOU HAVE DIED!!");
+            p.sendMessage(ChatColor.RED + "You will be able to respawn in the next 24 hours.");
             new BukkitRunnable() {
                 @Override
                 public void run() {

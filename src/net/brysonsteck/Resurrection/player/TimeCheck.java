@@ -10,13 +10,10 @@ public class TimeCheck {
     }
 
     public String formatTime() {
-        long hours = TimeUnit.MILLISECONDS.toHours(millis);
-
-        String formattedTime = String.format("%d hrs, %d min, %d sec",
+        return String.format("%d hrs, %d min, %d sec",
                 TimeUnit.MILLISECONDS.toHours(millis),
                 TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
                 TimeUnit.MILLISECONDS.toSeconds(millis) -
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-        return formattedTime;
     }
 }
