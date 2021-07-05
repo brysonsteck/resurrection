@@ -50,7 +50,7 @@ public class Resurrection extends JavaPlugin implements Listener {
 
         System.out.println("[Resurrection] Locating the file \"playerData.resurrection\"...");
         // check if playerData.resurrection exists
-        File playerFile = new File("playerData.resurrection");
+        File playerFile = new File("plugins/playerData.resurrection");
         if (!playerFile.exists()) {
             System.out.println("[Resurrection] Player data file does not exist. Creating now in the \"plugins\" directory...");
             try {
