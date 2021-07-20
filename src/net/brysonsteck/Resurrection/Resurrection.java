@@ -1,6 +1,7 @@
 package net.brysonsteck.Resurrection;
 
 import net.brysonsteck.Resurrection.commands.CommandAbout;
+import net.brysonsteck.Resurrection.commands.CommandBug;
 import net.brysonsteck.Resurrection.commands.CommandHowLong;
 import net.brysonsteck.Resurrection.commands.CommandResurrect;
 import net.brysonsteck.Resurrection.player.PlayerListener;
@@ -93,6 +94,7 @@ public class Resurrection extends JavaPlugin implements Listener {
 
         // register commands
         this.getCommand("about").setExecutor(new CommandAbout(pluginInfo.getVersion(), outdated));
+        this.getCommand("bug").setExecutor(new CommandBug());
         this.getCommand("resurrect").setExecutor(new CommandResurrect());
         this.getCommand("howlong").setExecutor(new CommandHowLong());
 

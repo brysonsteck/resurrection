@@ -16,3 +16,7 @@ commands:
     description: Manually resurrects a player.
     permission: op
     usage: /resurrect PLAYER_NAME
+
+  bug:
+    description: Displays contact info if you encounter a bug.
+    usage: /bug
