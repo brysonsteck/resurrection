@@ -14,11 +14,14 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Hashtable;
+
 public class PlayerListener implements Listener {
 
     boolean stillDead;
     boolean timerRunning = false;
     Location spawn;
+    Hashtable<String, Location> playerSpawns = new Hashtable<>();
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
@@ -170,6 +173,7 @@ public class PlayerListener implements Listener {
     public void onPlayerRespawn(PlayerRespawnEvent e) {
         if (stillDead) {
             final Player p = e.getPlayer();
+            playerSpawns.put(p.getDisplayName(), p.getLocation());
             p.setGameMode(GameMode.SPECTATOR);
             p.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "YOU HAVE DIED!!");
             p.sendMessage(ChatColor.RED + "You will be able to respawn in the next 24 hours.");
@@ -192,7 +196,7 @@ public class PlayerListener implements Listener {
     public void onPlayerMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         if (p.getGameMode() == GameMode.SPECTATOR) {
-            p.teleport(this.spawn);
+            p.teleport(playerSpawns.get(p.getDisplayName()));
         }
     }
 }
