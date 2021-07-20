@@ -48,6 +48,25 @@ public class Resurrection extends JavaPlugin implements Listener {
 
         }
 
+        // check for updates
+        System.out.println("[Resurrection] Checking for updates...");
+        CheckForUpdate check = new CheckForUpdate();
+        boolean outdated = false;
+        if (check.isSuccess()) {
+            String newestVersion = check.getVersion();
+            String newestVersionURL = check.getVersionURL();
+            if (pluginInfo.getVersion().equals(newestVersion)) {
+                System.out.println("[Resurrection] " + newestVersion + " is the latest version of Resurrection.");
+            } else {
+                System.out.println("[Resurrection] A new version of Resurrection is available! (current: " + pluginInfo.getVersion() + ", newest: " + newestVersion + ")");
+                System.out.println("[Resurrection] You can download the latest release on GitHub here \\/");
+                System.out.println("[Resurrection] " + newestVersionURL);
+                outdated = true;
+            }
+        }
+
+        System.out.println("[Resurrection] ---------------------------------------------------------");
+
         System.out.println("[Resurrection] Locating the file \"playerData.resurrection\"...");
         // check if playerData.resurrection exists
         File playerFile = new File("plugins/playerData.resurrection");
@@ -59,28 +78,11 @@ public class Resurrection extends JavaPlugin implements Listener {
             } catch (IOException e) {
                 System.out.println("[Resurrection] An error has occurred creating the player data file!");
                 e.printStackTrace();
+                System.out.println("[Resurrection] This file is crucial to Resurrection. Since the file could not be created, the plugin will now stop.");
+                System.exit(1);
             }
         } else {
             System.out.println("[Resurrection] The player data file has been found!");
-        }
-
-        System.out.println("[Resurrection] ---------------------------------------------------------");
-
-        // check for updates
-        System.out.println("[Resurrection] Checking for updates...");
-        CheckForUpdate check = new CheckForUpdate();
-        boolean outdated = false;
-        if (check.isSuccess()) {
-            String newestVersion = check.getVersion();
-            String newestVersionURL = check.getVersionURL();
-            if (pluginInfo.getVersion().equals(newestVersion)) {
-                System.out.println("[Resurrection] " + newestVersion + " is the latest version of Resurrection.");
-            } else {
-                System.out.println("[Resurrection] A new version of Resurrection is available! (current: " + pluginInfo.getVersion() + ", newest: " + newestVersion);
-                System.out.println("[Resurrection] You can download the latest release on GitHub here \\/");
-                System.out.println("[Resurrection] " + newestVersionURL);
-                outdated = true;
-            }
         }
 
         System.out.println("[Resurrection] ---------------------------------------------------------");

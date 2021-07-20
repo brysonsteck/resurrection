@@ -53,6 +53,12 @@ public class CommandHowLong implements CommandExecutor {
                                 commandSender.sendMessage(p.getDisplayName() + " will respawn in " + timeCheck.formatTime());
                             }
                             return true;
+                        } else {
+                            if (self) {
+                                commandSender.sendMessage("You aren't dead, dummy.");
+                            } else {
+                                commandSender.sendMessage("ERROR: " + p.getDisplayName() + " is not dead!");
+                            }
                         }
                     }
                 }
