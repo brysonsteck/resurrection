@@ -59,6 +59,7 @@ public class CommandHowLong implements CommandExecutor {
                             } else {
                                 commandSender.sendMessage("ERROR: " + p.getDisplayName() + " is not dead!");
                             }
+                            return false;
                         }
                     }
                 }
@@ -99,6 +100,9 @@ public class CommandHowLong implements CommandExecutor {
                             System.out.println("[Resurrection] " + p.getDisplayName() + " will respawn in " + timeCheck.formatTime());
 
                             return true;
+                        } else {
+                            System.out.println("[Resurrection] ERROR: " + p.getDisplayName() + " is not dead!");
+                            return false;
                         }
                     }
                 }
