@@ -33,7 +33,7 @@ public class PlayerListener implements Listener {
             if (block.getType() == Material.AIR) {
                 newY++;
                 System.out.println("The spawn block at X0 Z0 is Y" + newY);
-                spawn = testLocation;
+//                spawn = testLocation;
                 break;
             } else {
                 newY++;
