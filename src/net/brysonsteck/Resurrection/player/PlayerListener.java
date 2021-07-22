@@ -2,6 +2,7 @@ package net.brysonsteck.Resurrection.player;
 
 import net.brysonsteck.Resurrection.Resurrection;
 import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,8 +21,25 @@ public class PlayerListener implements Listener {
 
     boolean stillDead;
     boolean timerRunning = false;
+    World world = Bukkit.getWorlds().get(0);
     Location spawn;
     Hashtable<String, Location> playerSpawns = new Hashtable<>();
+
+    public PlayerListener() {
+        double newY = 0;
+        while(true) {
+            Location testLocation = new Location (world, 0, newY, 0);
+            Block block = testLocation.getBlock();
+            if (block.getType() == Material.AIR) {
+                newY++;
+                System.out.println("The spawn block at X0 Z0 is Y" + newY);
+                spawn = testLocation;
+                break;
+            } else {
+                newY++;
+            }
+        }
+    }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
@@ -92,6 +110,9 @@ public class PlayerListener implements Listener {
                         p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
                     }
                     Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + p.getDisplayName() + " has resurrected!");
+                    if (p.getBedSpawnLocation() != null) {
+                        p.teleport(p.getBedSpawnLocation());
+                    }
                 }
             }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), resurrectTime);
         }

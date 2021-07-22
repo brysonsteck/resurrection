@@ -7,6 +7,7 @@ import net.brysonsteck.Resurrection.commands.CommandResurrect;
 import net.brysonsteck.Resurrection.player.PlayerListener;
 import net.brysonsteck.Resurrection.player.TimeCheck;
 import net.brysonsteck.Resurrection.startup.CheckForUpdate;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
