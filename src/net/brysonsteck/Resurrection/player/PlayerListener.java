@@ -26,7 +26,7 @@ public class PlayerListener implements Listener {
     Hashtable<String, Location> playerSpawns = new Hashtable<>();
 
     public PlayerListener() {
-        double newY = 0;
+        double newY = 46;
         while(true) {
             Location testLocation = new Location (world, 0, newY, 0);
             Block block = testLocation.getBlock();
