@@ -201,7 +201,6 @@ public class PlayerListener implements Listener {
             p.setGameMode(GameMode.SPECTATOR);
             p.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "YOU HAVE DIED!!");
             p.sendMessage(ChatColor.RED + "You will be able to respawn in the next 24 hours.");
-            p.teleport(spawn);
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -212,6 +211,7 @@ public class PlayerListener implements Listener {
 //                invisibility.apply(p);
                     blindness.apply(p);
                     slowness.apply(p);
+                    p.teleport(spawn);
                 }
             }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 1);
         }
