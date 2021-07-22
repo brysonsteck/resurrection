@@ -25,22 +25,6 @@ public class PlayerListener implements Listener {
     Location spawn = world.getSpawnLocation();
     Hashtable<String, Location> playerSpawns = new Hashtable<>();
 
-    public PlayerListener() {
-        double newY = 46;
-        while(true) {
-            Location testLocation = new Location (world, 0, newY, 0);
-            Block block = testLocation.getBlock();
-            if (block.getType() == Material.AIR) {
-                newY++;
-                System.out.println("The spawn block at X0 Z0 is Y" + newY);
-//                spawn = testLocation;
-                break;
-            } else {
-                newY++;
-            }
-        }
-    }
-
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
@@ -90,7 +74,7 @@ public class PlayerListener implements Listener {
                     PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, 999999999, 10, false);
                     blindness.apply(p);
                     slowness.apply(p);
-                    // convert to seconds and to ticks
+                    p.teleport(spawn);
                 }
             }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 1);
             resurrectTime = resurrectTime - System.currentTimeMillis();
@@ -211,7 +195,6 @@ public class PlayerListener implements Listener {
 //                invisibility.apply(p);
                     blindness.apply(p);
                     slowness.apply(p);
-                    p.teleport(spawn);
                 }
             }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 1);
         }
