@@ -33,6 +33,9 @@ public class CommandResurrect implements CommandExecutor {
                     }
                     Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + strings[0] + " has been resurrected manually by an admin!");
                     removeDeath(resurrectPlayer);
+                    if (p.getBedSpawnLocation() != null) {
+                        p.teleport(p.getBedSpawnLocation());
+                    }
                     return true;
                 } else {
                     p.sendMessage(ChatColor.RED + strings[0] + " is not dead! Failed to resurrect.");
@@ -59,6 +62,9 @@ public class CommandResurrect implements CommandExecutor {
                     }
                     Bukkit.broadcastMessage(strings[0] + " has been resurrected manually by an admin!");
                     removeDeath(resurrectPlayer);
+                    if (resurrectPlayer.getBedSpawnLocation() != null) {
+                        resurrectPlayer.teleport(resurrectPlayer.getBedSpawnLocation());
+                    }
                     return true;
                 } else {
                     System.out.println(strings[0] + " is not dead! Failed to resurrect.");
