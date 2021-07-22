@@ -22,7 +22,7 @@ public class PlayerListener implements Listener {
     boolean stillDead;
     boolean timerRunning = false;
     World world = Bukkit.getWorlds().get(0);
-    Location spawn;
+    Location spawn = world.getSpawnLocation();
     Hashtable<String, Location> playerSpawns = new Hashtable<>();
 
     public PlayerListener() {
@@ -79,7 +79,7 @@ public class PlayerListener implements Listener {
             playerData.saveData(rawData + ";" + p.getDisplayName() + ",false,0");
         }
         if (resumeDeath && !timerRunning) {
-            spawn = p.getLocation();
+//            spawn = p.getLocation();
             p.sendMessage(ChatColor.RED + "You are still dead. To check how long you have left before you are resurrected, " +
                     "run \"howlong\" in chat.");
             new BukkitRunnable() {
@@ -201,7 +201,7 @@ public class PlayerListener implements Listener {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    spawn = p.getLocation();
+//                    spawn = p.getLocation();
 //                PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, 1728000, 10, false);
                     PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 999999999, 10, false);
                     PotionEffect slowness = new PotionEffect(PotionEffectType.SLOW, 999999999, 10, false);
@@ -217,7 +217,7 @@ public class PlayerListener implements Listener {
     public void onPlayerMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         if (p.getGameMode() == GameMode.SPECTATOR) {
-            p.teleport(playerSpawns.get(p.getDisplayName()));
+            p.teleport(spawn);
         }
     }
 }
