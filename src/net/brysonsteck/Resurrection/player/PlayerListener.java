@@ -186,6 +186,9 @@ public class PlayerListener implements Listener {
                     p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
                 }
                 Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + p.getDisplayName() + " has resurrected!");
+                if (p.getBedSpawnLocation() != null) {
+                    p.teleport(p.getBedSpawnLocation());
+                }
             }
         }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 1728000);
     }
