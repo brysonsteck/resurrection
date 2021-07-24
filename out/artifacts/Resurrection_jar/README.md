@@ -1,0 +1,3 @@
+# WAIT! About this Jar artifact:
+
+This jar currently contains the latest build of Resurrection, which is not guaranteed to be as stable (or even functional) as the most [recent release.](https://github.com/brysonsteck/resurrection/releases) I leave this jar in the repository to allow easier development in conjunction with my dedicated Minecraft server for testing purposes. **USE AT YOUR OWN RISK!**
