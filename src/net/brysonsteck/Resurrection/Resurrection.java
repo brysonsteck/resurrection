@@ -69,9 +69,24 @@ public class Resurrection extends JavaPlugin implements Listener {
 
         System.out.println("[Resurrection] ---------------------------------------------------------");
 
-        System.out.println("[Resurrection] Locating the file \"playerData.resurrection\"...");
+        System.out.println("[Resurrection] Locating player data and settings files...");
         // check if playerData.resurrection exists
         File playerFile = new File("plugins/playerData.resurrection");
+        File settingsFile = new File("plugins/settings.resurrection");
+        if (!playerFile.exists()) {
+            System.out.println("[Resurrection] Player data file does not exist. Creating now in the \"plugins\" directory...");
+            try {
+                playerFile.createNewFile();
+                System.out.println("[Resurrection] Player data file created successfully.");
+            } catch (IOException e) {
+                System.out.println("[Resurrection] An error has occurred creating the player data file!");
+                e.printStackTrace();
+                System.out.println("[Resurrection] This file is crucial to Resurrection. Since the file could not be created, the plugin will now stop.");
+                System.exit(1);
+            }
+        } else {
+            System.out.println("[Resurrection] The player data file has been found!");
+        }
         if (!playerFile.exists()) {
             System.out.println("[Resurrection] Player data file does not exist. Creating now in the \"plugins\" directory...");
             try {

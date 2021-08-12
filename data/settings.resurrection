@@ -1,0 +1,3 @@
+# This is the default settings file. All lines starting with a '#' are treated as comments and will be ignored.
+# 'resurrection_time' is the amount of time in milliseconds Resurrection will force the player to wait. Default value is 8640000 milliseconds (24 hours).
+resurrection_time=8640000
