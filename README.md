@@ -26,4 +26,4 @@ Native Version: 1.16
 
 This program automatically generates a [`playerData.resurrection`](data/playerData.resurrection) file in the same directory as the plugin Jar file. This file contains data for each player relevant for the plugin and is important to make sure that the resurrection timing stays in effect after a server shutdown. If this file is deleted, moved or doesn't exist, a blank file will be created in it's place upon enabling.
 
-***Please be aware that modifying, moving or removing this file after it's creation or while the plugin is enabled may cause the plugin to behave erratically￼,*** such as holding a player in a dead state for all of time and eternity. If you choose to do so, do it at your own risk. 
+***Please be aware that modifying, moving or removing this file after it's creation or while the plugin is enabled may cause the plugin to behave erratically,*** such as holding a player in a dead state for all of time and eternity. If you choose to do so, do it at your own risk. 
