@@ -14,7 +14,6 @@ public class ParseSettings {
     boolean settingsComplete;
     boolean valuesComplete;
 
-
     public ParseSettings() {
         try {
             File settingsFile = new File("plugins/settings.resurrection");
