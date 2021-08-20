@@ -41,13 +41,13 @@ public class PlayerListener implements Listener {
         int index = 0;
         boolean found = false;
         boolean resumeDeath = false;
-        long resurrectTime = 0;
+        long timeToResurrection = 0;
         for (String players : rawPlayers) {
             if (players.startsWith(p.getDisplayName())) {
                 found = true;
                 String[] playerSplit = players.split(",");
                 boolean dead = Boolean.parseBoolean(playerSplit[1]);
-                resurrectTime = Long.parseLong(playerSplit[2]);
+                timeToResurrection = Long.parseLong(playerSplit[2]);
 
                 if (!dead) {
                     for (PotionEffect effect : p.getActivePotionEffects())
@@ -83,11 +83,11 @@ public class PlayerListener implements Listener {
                     p.teleport(spawn);
                 }
             }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 1);
-            resurrectTime = resurrectTime - System.currentTimeMillis();
+            timeToResurrection = timeToResurrection - System.currentTimeMillis();
             // to seconds
-            resurrectTime = resurrectTime / 1000;
+            timeToResurrection = timeToResurrection / 1000;
             // to ticks
-            resurrectTime = resurrectTime * 20;
+            timeToResurrection = timeToResurrection * 20;
 
             new BukkitRunnable() {
                 @Override
@@ -104,7 +104,7 @@ public class PlayerListener implements Listener {
                         p.teleport(p.getBedSpawnLocation());
                     }
                 }
-            }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), resurrectTime);
+            }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), timeToResurrection);
         }
 
     }
@@ -116,7 +116,7 @@ public class PlayerListener implements Listener {
         stillDead = true;
         TimeCheck timeCheck = new TimeCheck(Long.parseLong(parseSettings.getSetting("resurrection_time")));
 
-        long resurrectionTime = System.currentTimeMillis() + 86400000;
+        long resurrectionTime = System.currentTimeMillis() + Long.parseLong(parseSettings.getSetting("resurrection_time"));
 
         p.sendMessage("You have died!! You will be able to respawn in the next " + timeCheck.formatTime('h'));
         timerRunning = true;
@@ -141,6 +141,12 @@ public class PlayerListener implements Listener {
             }
             index++;
         }
+
+        long timeToResurrection = Long.parseLong(parseSettings.getSetting("resurrection_time"));
+        // to seconds
+        timeToResurrection = timeToResurrection / 1000;
+        // to ticks
+        timeToResurrection = timeToResurrection * 20;
 
 
         new BukkitRunnable() {
@@ -175,17 +181,18 @@ public class PlayerListener implements Listener {
                     p.teleport(p.getBedSpawnLocation());
                 }
             }
-        }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 1728000);
+        }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), timeToResurrection);
     }
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent e) {
         if (stillDead) {
             final Player p = e.getPlayer();
+            TimeCheck timeCheck = new TimeCheck(Long.parseLong(parseSettings.getSetting("resurrection_time")));
             playerSpawns.put(p.getDisplayName(), p.getLocation());
             p.setGameMode(GameMode.SPECTATOR);
             p.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "YOU HAVE DIED!!");
-            p.sendMessage(ChatColor.RED + "You will be able to respawn in the next 24 hours.");
+            p.sendMessage(ChatColor.RED + "You will be able to respawn in the next " + timeCheck.formatTime('f'));
             new BukkitRunnable() {
                 @Override
                 public void run() {

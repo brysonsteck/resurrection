@@ -151,6 +151,7 @@ public class Resurrection extends JavaPlugin implements Listener {
 
 //        TimeCheck timeCheck = new TimeCheck((System.currentTimeMillis() + 86212345) - System.currentTimeMillis());
 //        System.out.println(timeCheck.formatTime());
+        System.out.println(System.currentTimeMillis());
     }
 
 }
