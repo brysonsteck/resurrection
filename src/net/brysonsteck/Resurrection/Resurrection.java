@@ -82,7 +82,6 @@ public class Resurrection extends JavaPlugin implements Listener {
                 System.out.println("[Resurrection] An error has occurred creating the player data file!");
                 e.printStackTrace();
                 System.out.println("[Resurrection] This file is crucial to Resurrection. Since the file could not be created, the plugin will now stop.");
-                System.exit(1);
             }
         } else {
             System.out.println("[Resurrection] The player data file has been found!");
@@ -90,13 +89,13 @@ public class Resurrection extends JavaPlugin implements Listener {
         if (!settingsFile.exists()) {
             System.out.println("[Resurrection] Settings file does not exist. (This file is new with the 0.2 beta if you upgraded.) Creating now in the \"plugins\" directory...");
             try {
-                playerFile.createNewFile();
+                settingsFile.createNewFile();
                 System.out.println("[Resurrection] Settings file created successfully.");
             } catch (IOException e) {
                 System.out.println("[Resurrection] An error has occurred creating the settings file!");
                 e.printStackTrace();
                 System.out.println("[Resurrection] This file is crucial to Resurrection. Since the file could not be created, the plugin will now stop.");
-                System.exit(1);
+                Bukkit.getPluginManager().disablePlugin(this);
             }
         } else {
             System.out.println("[Resurrection] The settings file has also been found!");
@@ -159,7 +158,6 @@ public class Resurrection extends JavaPlugin implements Listener {
 
 //        TimeCheck timeCheck = new TimeCheck((System.currentTimeMillis() + 86212345) - System.currentTimeMillis());
 //        System.out.println(timeCheck.formatTime());
-
     }
 
 }

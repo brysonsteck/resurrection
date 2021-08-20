@@ -1,6 +1,10 @@
 package net.brysonsteck.Resurrection.player;
 
 
+import net.brysonsteck.Resurrection.Resurrection;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
+
 import java.io.*;
 import java.util.Hashtable;
 
@@ -38,7 +42,10 @@ public class PlayerData {
                 this.playerData.put(playerData[0], playerHash);
             }
         } catch (IOException e) {
+            System.out.println("[Resurrection] There was an issue reading the player data file.");
             e.printStackTrace();
+            System.out.println("[Resurrection] This file is crucial to Resurrection. Since the file could not be read, the plugin will now stop.");
+            Bukkit.getPluginManager().disablePlugin(JavaPlugin.getProvidingPlugin(Resurrection.class));
         }
     }
 
