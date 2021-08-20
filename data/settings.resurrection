@@ -3,4 +3,3 @@
 resurrection_time=86400000
 # 'debug' enables debug messages in the console and players' chat as the plugin runs. The only valid values are 'true' and 'false'. Default value is false.
 debug=false
-# 'death_time_format' changes the way the remaining time is formatted to show players who just died.
