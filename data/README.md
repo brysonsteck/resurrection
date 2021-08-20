@@ -1,3 +1,5 @@
+The following applies to all files in this directory with the exception of `resurrection.png`, which is the image used for the plugin icon on the Spigot website. 
+
 # Example Files
 
 These files are crucial to Resurrection as they contain important timing data and resources for the plugin. 
