@@ -17,7 +17,7 @@ public class ParseSettings {
 
     public ParseSettings() {
         try {
-            File settingsFile = new File("data/settings.resurrection");
+            File settingsFile = new File("plugins/settings.resurrection");
             if (!settingsFile.exists()) {
                 // create default settings file
                 FileWriter writer = new FileWriter(settingsFile);
@@ -29,7 +29,7 @@ public class ParseSettings {
                 writer.close();
             }
             String rawData = "";
-            BufferedReader reader = new BufferedReader(new FileReader("data/settings.resurrection"));
+            BufferedReader reader = new BufferedReader(new FileReader("plugins/settings.resurrection"));
             String line;
             String[] setting;
             while (true) {
@@ -59,8 +59,10 @@ public class ParseSettings {
                 System.exit(1);
             }
         } catch (IOException e) {
-            System.out.println("[Resurrection] There was an issue reading the Settings file.");
+            System.out.println("[Resurrection] There was an issue reading the Settings file:");
             e.printStackTrace();
+            System.out.println("[Resurrection] This file is crucial to Resurrection. Since the file is not complete, the plugin will now stop.");
+            System.exit(1);
         }
     }
 
