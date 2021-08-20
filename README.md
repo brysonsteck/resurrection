@@ -6,7 +6,7 @@ Resurrection is a Spigot Minecraft Server plugin that forces players to wait a f
 
 ## Compatibility 
 
-Tested Versions: 1.16
+Tested Versions: 1.13, 1.14, 1.15, 1.16, 1.17
 Native Version: 1.16
 
 ## Commands
@@ -24,6 +24,6 @@ Native Version: 1.16
 
 ## Files
 
-This program automatically generates a [`playerData.resurrection`](data/playerData.resurrection) file in the same directory as the plugin Jar file. This file contains data for each player relevant for the plugin and is important to make sure that the resurrection timing stays in effect after a server shutdown. If this file is deleted, moved or doesn't exist, a blank file will be created in it's place upon enabling.
+This program automatically generates a [`playerData.resurrection`](data/playerData.resurrection) and a [`settings.resurrection`](data/settings.resurrection) file in the same directory as the plugin Jar file. These files contain data for each player relevant for the plugin and contains settings for the plugin. It is important for these files to be present (and **UNMODIFIED** in the case of the playerData file) to make sure that the resurrection timing stays in effect after a server shutdown and for the proper functioning of the plugin in general. If these files are deleted, moved or do not exist, blank/default files will be created in it's place upon enabling.
 
 ***Please be aware that modifying, moving or removing this file after it's creation or while the plugin is enabled may cause the plugin to behave erratically,*** such as holding a player in a dead state for all of time and eternity. If you choose to do so, do it at your own risk. 
