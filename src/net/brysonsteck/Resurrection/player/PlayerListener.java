@@ -1,5 +1,6 @@
 package net.brysonsteck.Resurrection.player;
 
+import net.brysonsteck.Resurrection.ParseSettings;
 import net.brysonsteck.Resurrection.Resurrection;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -24,6 +25,11 @@ public class PlayerListener implements Listener {
     World world = Bukkit.getWorlds().get(0);
     Location spawn = world.getSpawnLocation();
     Hashtable<String, Location> playerSpawns = new Hashtable<>();
+    ParseSettings parseSettings;
+
+    public PlayerListener() {
+        parseSettings = new ParseSettings();
+    }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
@@ -108,16 +114,11 @@ public class PlayerListener implements Listener {
         System.out.println("Resurrection: A player has died!");
         Player p = e.getEntity();
         stillDead = true;
-//
-//        TimeCheck death = new TimeCheck(timeOfDeath);
-//        TimeCheck resurrect = new TimeCheck((timeOfDeath + 86400000) - timeOfDeath);
-//
-//        String deathFormatted = death.formatTime();
-//        String resurrectFormatted = resurrect.formatTime();
-//        long timeOfDeath = System.currentTimeMillis();
+        TimeCheck timeCheck = new TimeCheck(Long.parseLong(parseSettings.getSetting("resurrection_time")));
+
         long resurrectionTime = System.currentTimeMillis() + 86400000;
 
-        p.sendMessage("You have died!! You will be able to respawn in the next 24 hours.");
+        p.sendMessage("You have died!! You will be able to respawn in the next " + timeCheck.formatTime('h'));
         timerRunning = true;
 
         // save death state

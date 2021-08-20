@@ -48,9 +48,9 @@ public class CommandHowLong implements CommandExecutor {
 
                             TimeCheck timeCheck = new TimeCheck(resurrectionTime - currentTime);
                             if (self) {
-                                commandSender.sendMessage("You will respawn in " + timeCheck.formatTime());
+                                commandSender.sendMessage("You will respawn in " + timeCheck.formatTime('f'));
                             } else {
-                                commandSender.sendMessage(p.getDisplayName() + " will respawn in " + timeCheck.formatTime());
+                                commandSender.sendMessage(p.getDisplayName() + " will respawn in " + timeCheck.formatTime('f'));
                             }
                             return true;
                         } else {
@@ -97,7 +97,7 @@ public class CommandHowLong implements CommandExecutor {
 
                             TimeCheck timeCheck = new TimeCheck(resurrectionTime - currentTime);
 
-                            System.out.println("[Resurrection] " + p.getDisplayName() + " will respawn in " + timeCheck.formatTime());
+                            System.out.println("[Resurrection] " + p.getDisplayName() + " will respawn in " + timeCheck.formatTime('f'));
 
                             return true;
                         } else {
