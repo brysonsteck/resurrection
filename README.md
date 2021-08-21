@@ -2,7 +2,7 @@
 
 Resurrection is a Spigot Minecraft Server plugin that forces players to wait a full 24 hours before rejoining the world. This allows for tactical planning for games such as faction survival as it can severely penalize an entire team if care is not taken.
 
-**This plugin is currently in a beta state.** This means that the plugin's functionality may not be stable or as intended. Opening issues here on GitHub or contacting me on Discord at bryzinga#9971 is heavily recommended if a bug occurs. 
+**This plugin is currently in a beta state.** This means that the plugin's functionality may not be stable or as intended. Opening issues here on GitHub or filling out this [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSd8RWwcGTy7rtqPl4J7h1UWE-H0KKp1Usr1NOFdgZkVLmLUtw/viewform?usp=sf_link) is heavily recommended if a bug occurs. 
 
 ## Compatibility 
 
@@ -14,7 +14,7 @@ Native Version: 1.16
 * `/about`
     * Displays information about the plugin, including links to GitHub and Spigot, and also warns the player if the plugin is outdated. 
 * `/bug`
-    * Displays contact information in case a bug occurs, such as links to the GitHub issues page and my Discord.
+    * Displays contact information in case a bug occurs, such as links to the GitHub issues page and the Google Form.
 * `/howlong [PLAYER]`
     * Shows the player how long they (or the specified player) have until they are resurrected.
     * This command requires a player to be specified when ran from the console. 
