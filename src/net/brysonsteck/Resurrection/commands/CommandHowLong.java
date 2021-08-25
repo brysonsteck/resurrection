@@ -31,7 +31,7 @@ public class CommandHowLong implements CommandExecutor {
                 } else {
                     p = Bukkit.getPlayer(strings[0]);
                     if (p == null) {
-                        commandSender.sendMessage(ChatColor.RED + "ERROR: Player does not exist or is offline!");
+                        commandSender.sendMessage(ChatColor.RED + "ERROR: That player is not online/doesn't exist!");
                         return false;
                     }
                 }
@@ -80,7 +80,7 @@ public class CommandHowLong implements CommandExecutor {
 
                 Player p = Bukkit.getPlayer(strings[0]);
                 if (p == null) {
-                    System.out.println(ChatColor.RED + "[Resurrection] ERROR: Player does not exist or is offline!");
+                    System.out.println("[Resurrection] ERROR: That player is not online/doesn't exist!");
                     return false;
                 }
 

@@ -49,7 +49,7 @@ public class CommandResurrect implements CommandExecutor {
             if (valid) {
                 Player resurrectPlayer = Bukkit.getPlayer(strings[0]);
                 if (resurrectPlayer == null) {
-                    System.out.println("[Resurrection] That player is not online/doesn't exist! Failed to resurrect.");
+                    System.out.println("[Resurrection] ERROR: That player is not online/doesn't exist! Failed to resurrect.");
                     return false;
                 }
                 if (resurrectPlayer.getGameMode() == GameMode.SPECTATOR) {
@@ -66,7 +66,7 @@ public class CommandResurrect implements CommandExecutor {
                     }
                     return true;
                 } else {
-                    System.out.println("[Resurrection] " + strings[0] + " is not dead! Failed to resurrect.");
+                    System.out.println("[Resurrection] ERROR: " + strings[0] + " is not dead! Failed to resurrect.");
                     return false;
                 }
             } else {

@@ -42,7 +42,7 @@ public class CommandAbout implements CommandExecutor {
             System.out.println("[Resurrection]");
             System.out.println("[Resurrection] This plugin is licensed under the GNU Affero General Public License v3.0. For more info, run /source");
             System.out.println("[Resurrection] Since you're the admin, you probably know where to download it lmao. Here's the link anyway: https://github.com/brysonsteck/resurrection");
-            System.out.println("[Resurrection] \u00a9 2021 Bryson Steck");
+            System.out.println("[Resurrection] Copyright 2021 Bryson Steck");
 
         }
         return true;
