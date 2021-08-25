@@ -14,10 +14,10 @@ public class CommandSource implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player) {
-            commandSender.sendMessage(ChatColor.AQUA + "Resurrection is FREE AND OPEN SOURCE under the");
-            commandSender.sendMessage(ChatColor.AQUA + "GNU Affero General Public License v3.0 via GitHub.");
-            commandSender.sendMessage(ChatColor.AQUA + "You can view the repository at https://github.com/brysonsteck/resurrection");
-            commandSender.sendMessage(ChatColor.AQUA + "and the license at https://github.com/brysonsteck/resurrection/blob/master/LICENSE");
+            commandSender.sendMessage(ChatColor.YELLOW + "Resurrection is FREE AND OPEN SOURCE under the");
+            commandSender.sendMessage(ChatColor.YELLOW + "GNU Affero General Public License v3.0 via GitHub.");
+            commandSender.sendMessage(ChatColor.YELLOW + "You can view the repository at " + ChatColor.AQUA + "https://github.com/brysonsteck/resurrection");
+            commandSender.sendMessage(ChatColor.YELLOW + "and the license at " + ChatColor.AQUA + "https://github.com/brysonsteck/resurrection/blob/master/LICENSE");
 
             return true;
         } else {

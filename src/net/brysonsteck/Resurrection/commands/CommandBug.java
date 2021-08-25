@@ -20,8 +20,8 @@ public class CommandBug implements CommandExecutor {
                 public void run() {
                     commandSender.sendMessage("");
                     commandSender.sendMessage(ChatColor.YELLOW + "Okay, fine. Maybe I'll tell you how to fix the problem. Hehe.");
-                    commandSender.sendMessage(ChatColor.YELLOW + "You can either create an issue on GitHub here: " + ChatColor.BLUE + "https://github.com/brysonsteck/resurrection/issues");
-                    commandSender.sendMessage(ChatColor.YELLOW + "OR you can fill out this Google Form if you don't know how to use GitHub: " + ChatColor.BLUE + "https://forms.gle/3gLmhMXowNyqKUGdA");
+                    commandSender.sendMessage(ChatColor.YELLOW + "You can either create an issue on GitHub here: " + ChatColor.AQUA + "https://github.com/brysonsteck/resurrection/issues");
+                    commandSender.sendMessage(ChatColor.YELLOW + "OR you can fill out this Google Form if you don't know how to use GitHub: " + ChatColor.AQUA + "https://forms.gle/3gLmhMXowNyqKUGdA");
                     commandSender.sendMessage(ChatColor.YELLOW + "Please prepare to explain how the bug occurred regardless of how you report the bug to me.");
                 }
             }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 60);
