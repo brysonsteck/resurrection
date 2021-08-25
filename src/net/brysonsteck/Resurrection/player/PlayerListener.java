@@ -118,7 +118,7 @@ public class PlayerListener implements Listener {
 
         long resurrectionTime = System.currentTimeMillis() + Long.parseLong(parseSettings.getSetting("resurrection_time"));
 
-        e.setDeathMessage(e.getDeathMessage() + ". They will respawn in the next " + timeCheck.formatTime('f'));
+//        e.setDeathMessage(e.getDeathMessage() + ". They will respawn in the next " + timeCheck.formatTime('f'));
 //        p.sendMessage("You have died!! You will be able to respawn in the next " + timeCheck.formatTime('h'));
         timerRunning = true;
 
@@ -183,6 +183,7 @@ public class PlayerListener implements Listener {
                 }
             }
         }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), timeToResurrection);
+        Bukkit.broadcastMessage("They will respawn in the next " + timeCheck.formatTime('f'));
     }
 
     @EventHandler
