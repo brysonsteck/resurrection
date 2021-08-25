@@ -1,7 +1,7 @@
 main: net.brysonsteck.Resurrection.Resurrection
 name: Resurrection
 author: 'Bryson Steck'
-version: '0.2.1 beta'
+version: '1.0'
 commands:
   about:
     description: Displays information about Resurrection.
@@ -18,5 +18,9 @@ commands:
     usage: /resurrect PLAYER_NAME
 
   bug:
-    description: Displays contact info if you encounter a bug.
+    description: Displays contact info if you encounter a bug using Resurrection.
     usage: /bug
+
+  source:
+    description: Displays info about the source code of Resurrection.
+    usage: /source

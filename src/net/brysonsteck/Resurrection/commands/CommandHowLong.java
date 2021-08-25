@@ -48,22 +48,22 @@ public class CommandHowLong implements CommandExecutor {
 
                             TimeCheck timeCheck = new TimeCheck(resurrectionTime - currentTime);
                             if (self) {
-                                commandSender.sendMessage("You will respawn in " + timeCheck.formatTime('f'));
+                                commandSender.sendMessage(ChatColor.YELLOW + "You will respawn in " + timeCheck.formatTime('f'));
                             } else {
-                                commandSender.sendMessage(p.getDisplayName() + " will respawn in " + timeCheck.formatTime('f'));
+                                commandSender.sendMessage(ChatColor.YELLOW + p.getDisplayName() + " will respawn in " + timeCheck.formatTime('f'));
                             }
                             return true;
                         } else {
                             if (self) {
-                                commandSender.sendMessage("You aren't dead, dummy.");
+                                commandSender.sendMessage(ChatColor.RED + "ERROR: You aren't dead, dummy.");
                             } else {
-                                commandSender.sendMessage("ERROR: " + p.getDisplayName() + " is not dead!");
+                                commandSender.sendMessage(ChatColor.RED + "ERROR: " + p.getDisplayName() + " is not dead!");
                             }
                             return false;
                         }
                     }
                 }
-                commandSender.sendMessage("ERROR: An error has occurred while trying to get time information. This is a bug in the program and not your fault.");
+                commandSender.sendMessage(ChatColor.RED + "ERROR: An error has occurred while trying to get time information. This is a bug in the program and not your fault.");
                 return false;
             }
         } else {

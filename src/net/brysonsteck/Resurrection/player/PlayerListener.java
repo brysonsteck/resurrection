@@ -70,8 +70,8 @@ public class PlayerListener implements Listener {
         }
         if (resumeDeath && !timerRunning) {
 //            spawn = p.getLocation();
-            p.sendMessage(ChatColor.RED + "You are still dead. To check how long you have left before you are resurrected, " +
-                    "run \"howlong\" in chat.");
+            p.sendMessage(ChatColor.RED + "You are still dead. To check how long you have left before you are resurrected, ");
+            p.sendMessage(ChatColor.RED + "run the \"/howlong\" command in chat.");
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -111,14 +111,15 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
-        System.out.println("Resurrection: A player has died!");
+        System.out.println("[Resurrection] A player has died!");
         Player p = e.getEntity();
         stillDead = true;
         TimeCheck timeCheck = new TimeCheck(Long.parseLong(parseSettings.getSetting("resurrection_time")));
 
         long resurrectionTime = System.currentTimeMillis() + Long.parseLong(parseSettings.getSetting("resurrection_time"));
 
-        p.sendMessage("You have died!! You will be able to respawn in the next " + timeCheck.formatTime('h'));
+        e.setDeathMessage(e.getDeathMessage() + ". They will respawn in the next " + timeCheck.formatTime('f'));
+//        p.sendMessage("You have died!! You will be able to respawn in the next " + timeCheck.formatTime('h'));
         timerRunning = true;
 
         // save death state

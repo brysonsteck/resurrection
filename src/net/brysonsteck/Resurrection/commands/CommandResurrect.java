@@ -21,7 +21,7 @@ public class CommandResurrect implements CommandExecutor {
             if (valid) {
                 Player resurrectPlayer = Bukkit.getPlayer(strings[0]);
                 if (resurrectPlayer == null) {
-                    p.sendMessage(ChatColor.RED + "That player does not exist! Failed to resurrect.");
+                    p.sendMessage(ChatColor.RED + "ERROR: That player is not online/doesn't exist! Failed to resurrect.");
                     return false;
                 }
                 if (resurrectPlayer.getGameMode() == GameMode.SPECTATOR) {
@@ -38,19 +38,18 @@ public class CommandResurrect implements CommandExecutor {
                     }
                     return true;
                 } else {
-                    p.sendMessage(ChatColor.RED + strings[0] + " is not dead! Failed to resurrect.");
+                    p.sendMessage(ChatColor.RED + "ERROR: " + strings[0] + " is not dead! Failed to resurrect.");
                     return false;
                 }
             } else {
-                System.out.println(ChatColor.RED + "Too few arguments!");
-                System.out.println(ChatColor.RED + "Usage: /resurrect PLAYER");
+                System.out.println(ChatColor.RED + "ERROR: Too few arguments!");
                 return false;
             }
         } else {
             if (valid) {
                 Player resurrectPlayer = Bukkit.getPlayer(strings[0]);
                 if (resurrectPlayer == null) {
-                    System.out.println("That player does not exist! Failed to resurrect.");
+                    System.out.println("[Resurrection] That player is not online/doesn't exist! Failed to resurrect.");
                     return false;
                 }
                 if (resurrectPlayer.getGameMode() == GameMode.SPECTATOR) {
@@ -67,12 +66,11 @@ public class CommandResurrect implements CommandExecutor {
                     }
                     return true;
                 } else {
-                    System.out.println(strings[0] + " is not dead! Failed to resurrect.");
+                    System.out.println("[Resurrection] " + strings[0] + " is not dead! Failed to resurrect.");
                     return false;
                 }
             } else {
-                System.out.println("Too few arguments!");
-                System.out.println("Usage: /resurrect PLAYER");
+                System.out.println("[Resurrection] ERROR: Too few arguments!");
                 return false;
             }
         }

@@ -17,29 +17,33 @@ public class CommandAbout implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        String aboutMessage = ChatColor.GREEN + "" + ChatColor.BOLD + "Resurrection\n\n" + ChatColor.RESET +
-                "Resurrection is a Spigot Minecraft plugin that forces players to wait 24 hours before respawning.\n" +
-                "The current version of this plugin is " + currentVersion + ".\n\n" +
-                "This plugin is licensed under the GNU Affero General Public License v3.0. Read more here: " +
-                "For more information on this plugin or to download it for yourself, visit the GitHub repository at https://github.com/brysonsteck/resurrection" +
-                "\u00a9 2021 Bryson Steck.";
+
 
         if (commandSender instanceof Player) {
             Player p = (Player) commandSender;
-            p.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Resurrection" + ChatColor.RESET);
-            p.sendMessage("");
-            p.sendMessage(ChatColor.YELLOW + "Resurrection is a Spigot Minecraft plugin that forces players to wait 24 hours before respawning.");
+            p.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "--- Resurrection ---" + ChatColor.RESET);
+            p.sendMessage(ChatColor.YELLOW + "Resurrection is a Spigot Minecraft plugin that forces players to wait a certain amount of time before respawning.");
             p.sendMessage(ChatColor.YELLOW + "This server is running version " + ChatColor.AQUA + currentVersion + ChatColor.YELLOW + " of Resurrection.");
-            p.sendMessage("");
             if (outdated) {
-                p.sendMessage(ChatColor.RED + "A newer version of this plugin is available. Please notify a server admin to update this plugin for new features and/or stability improvements.");
-                p.sendMessage("");
+                p.sendMessage(ChatColor.RED + "HOWEVER, A newer version of this plugin is available. Please notify a server admin to update this plugin for new features and/or stability improvements.");
             }
+            p.sendMessage("---");
+            p.sendMessage(ChatColor.YELLOW + "This plugin is licensed under the GNU Affero General Public License v3.0. For more info, run " + ChatColor.AQUA + "/source");
+            p.sendMessage(ChatColor.YELLOW + "For more info on this plugin or to download it, visit the GitHub repository at https://github.com/brysonsteck/resurrection");
             p.sendMessage(ChatColor.YELLOW + "\u00a9 2021 Bryson Steck");
-            p.sendMessage(ChatColor.YELLOW + "This plugin is licensed under the GNU Affero General Public License v3.0. Read more here: https://www.gnu.org/licenses/agpl-3.0.en.html");
-            p.sendMessage(ChatColor.YELLOW + "For more information on this plugin or to download it for yourself, visit the GitHub repository at https://github.com/brysonsteck/resurrection");
         } else {
-            System.out.println(aboutMessage);
+            System.out.println("[Resurrection] --- Resurrection ---");
+            System.out.println("[Resurrection]");
+            System.out.println("[Resurrection] Resurrection is a Spigot Minecraft plugin that forces players to wait a certain amount of time before respawning.");
+            System.out.println("[Resurrection] This server is running version " + currentVersion + " of Resurrection.");
+            if (outdated) {
+                System.out.println("[Resurrection] HOWEVER, a newer version of Resurrection is available. Please check the updater on startup for more information.");
+            }
+            System.out.println("[Resurrection]");
+            System.out.println("[Resurrection] This plugin is licensed under the GNU Affero General Public License v3.0. For more info, run /source");
+            System.out.println("[Resurrection] Since you're the admin, you probably know where to download it lmao. Here's the link anyway: https://github.com/brysonsteck/resurrection");
+            System.out.println("[Resurrection] \u00a9 2021 Bryson Steck");
+
         }
         return true;
     }
