@@ -41,6 +41,7 @@ If you have encountered a bug, would like to suggest new features or simply prov
 
 All files in this repository are subject to copyright under the GNU Affero General Public License Version 3. To read the full license, click [here.](LICENSE)
 
+```
 Resurrection is a Minecraft plugin that forces players to wait a certain amount of time before respawning.
 Copyright &copy; 2021 Bryson Steck
 
@@ -56,3 +57,4 @@ GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
+```
