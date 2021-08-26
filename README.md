@@ -1,6 +1,5 @@
 # Resurrection
-
-[![Resurrection]https://brysonsteck.net/resurrection-sc.png](#readme)
+![](https://brysonsteck.net/resurrection-sc.png)
 
 Resurrection is a Spigot Minecraft Server plugin that forces players to wait a certain amount of time before rejoining the world. This allows for tactical planning for games such as faction survival and other PvP gamemodes as it can severely penalize an entire team if care is not taken.
 
