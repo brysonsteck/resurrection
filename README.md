@@ -35,15 +35,17 @@ This program automatically generates a [`playerData.resurrection`](data/playerDa
 
 ## Bugs and Feedback
 
-If you have encountered a bug, would like to suggest new features or simply provide feedback, I'd highly recommend you use GitHub issues in order to do so. However, I am aware that people visit this site and are so uncultured that they don't know what they are looking at (jk i love all of you). In that case, I created this [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSd8RWwcGTy7rtqPl4J7h1UWE-H0KKp1Usr1NOFdgZkVLmLUtw/viewform?usp=sf_link) as a secondary option to submit issues if you wish. Just know that you don't have as much flexibility with reporting things as you would here using GitHub issues. All reports from the Google Form are posted and tracked through GitHub issues regardless.
+If you have encountered a bug, would like to suggest new features or simply provide feedback, I'd highly recommend you use GitHub issues in order to do so. However, I am aware that people visit this site and are so uncultured that they don't know what they are looking at (jk i love all of you). In that case, I created this [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSd8RWwcGTy7rtqPl4J7h1UWE-H0KKp1Usr1NOFdgZkVLmLUtw/viewform?usp=sf_link) as a secondary option to submit issues if you wish. 
+
+If you choose to submit your report via Google Forms, just know that you don't have as much flexibility with reporting things as you would here using GitHub issues. Also know that all reports from the Google Form are posted and tracked through GitHub issues regardless.
 
 ## License and Copyright Notice
 
 All files in this repository are subject to copyright under the GNU Affero General Public License Version 3. To read the full license, click [here.](LICENSE)
 
 ```
-Resurrection is a Minecraft plugin that forces players to wait a certain amount of time before respawning.
-Copyright &copy; 2021 Bryson Steck
+Resurrection is a Minecraft plugin that forces players to wait long amounts of time before respawning.
+Copyright (C) 2021 Bryson Steck
 
 Resurrection is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as
