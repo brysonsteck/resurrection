@@ -1,5 +1,7 @@
 # Resurrection
 
+[![Resurrection]https://brysonsteck.net/resurrection-sc.png]
+
 Resurrection is a Spigot Minecraft Server plugin that forces players to wait a certain amount of time before rejoining the world. This allows for tactical planning for games such as faction survival and other PvP gamemodes as it can severely penalize an entire team if care is not taken.
 
 Resurrection is intended to make players wait long amounts of time between death and respawn, preferably 24 hours minimum. Resurrection sets the time to be 24 hours by default. However, you can make players to wait any amount of time you wish, whether shorter or longer than the default 24 hours, but your experience with this plugin may be impacted.
