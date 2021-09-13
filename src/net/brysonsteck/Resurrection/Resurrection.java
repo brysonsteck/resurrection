@@ -104,9 +104,10 @@ public class Resurrection extends JavaPlugin implements Listener {
             boolean DEBUG = false;
             if (Boolean.parseBoolean(parseSettings.getSetting("debug"))) {
                 DEBUG = true;
-                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Resurrection's debug mode has been enabled in the settings file.");
-                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: All debug messages will be broadcasted (sent to everyone) prefaced with the tag \"[Res. DEBUG]\" and sent in bold yellow text.");
-                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Several messages may be sent at a time. Therefore, debug mode should be disabled for anything other than, well, debugging.");
+                System.out.println("[Res. DEBUG]: *****        DEBUG MODE ENABLED        *****");
+                System.out.println("[Res. DEBUG]: Resurrection's debug mode has been enabled in the settings file.");
+                System.out.println("[Res. DEBUG]: All debug messages after this disclaimer will be broadcasted (sent to everyone) prefaced with the tag \"[Res. DEBUG]\" and sent in bold yellow text.");
+                System.out.println("[Res. DEBUG]: Several messages may be sent at a time. Therefore, debug mode should be disabled for anything other than, well, debugging.");
                 System.out.println("[Resurrection] ---------------------------------------------------------");
             }
 
