@@ -105,5 +105,5 @@ public class ParseSettings {
         return settings.get(setting);
     }
 
-    public boolean isSettingsComplete() { return settingsComplete; }
+    public boolean isSettingsComplete() { return settingsComplete && valuesComplete; }
 }
