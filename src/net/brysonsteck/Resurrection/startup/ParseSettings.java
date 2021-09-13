@@ -1,5 +1,6 @@
 package net.brysonsteck.Resurrection.startup;
 
+import net.brysonsteck.Resurrection.Resurrection;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -55,13 +56,13 @@ public class ParseSettings {
                             "[Resurrection]     Example: \"debug=false\"");
                 }
                 System.out.println("[Resurrection] This file is crucial to Resurrection. Since the file is not complete, the plugin will now stop.");
-                System.exit(1);
+                Bukkit.getPluginManager().disablePlugin(JavaPlugin.getProvidingPlugin(Resurrection.class));
             }
         } catch (IOException e) {
             System.out.println("[Resurrection] There was an issue reading the Settings file:");
             e.printStackTrace();
             System.out.println("[Resurrection] This file is crucial to Resurrection. Since the file is not complete, the plugin will now stop.");
-            System.exit(1);
+            Bukkit.getPluginManager().disablePlugin(JavaPlugin.getProvidingPlugin(Resurrection.class));
         }
     }
 
