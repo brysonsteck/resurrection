@@ -4,6 +4,7 @@ import net.brysonsteck.Resurrection.commands.*;
 import net.brysonsteck.Resurrection.player.PlayerListener;
 import net.brysonsteck.Resurrection.startup.CheckForUpdate;
 import net.brysonsteck.Resurrection.startup.ParseSettings;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -71,6 +72,8 @@ public class Resurrection extends JavaPlugin implements Listener {
         // check if playerData.resurrection exists
         File playerFile = new File("plugins/playerData.resurrection");
         File settingsFile = new File("plugins/settings.resurrection");
+
+        boolean fileFail = false;
         if (!playerFile.exists()) {
             System.out.println("[Resurrection] Player data file does not exist. Creating now in the \"plugins\" directory...");
             try {
@@ -80,12 +83,14 @@ public class Resurrection extends JavaPlugin implements Listener {
                 System.out.println("[Resurrection] An error has occurred creating the player data file!");
                 e.printStackTrace();
                 System.out.println("[Resurrection] This file is crucial to Resurrection. Since the file could not be created, the plugin will now stop.");
+                Bukkit.getPluginManager().disablePlugin(this);
+                fileFail = true;
             }
         } else {
             System.out.println("[Resurrection] The player data file has been found!");
         }
         if (!settingsFile.exists()) {
-            System.out.println("[Resurrection] Settings file does not exist. (This file is new with the 0.2 beta if you upgraded.) Creating now in the \"plugins\" directory...");
+            System.out.println("[Resurrection] Settings file does not exist. Creating now in the \"plugins\" directory...");
             parseSettings = new ParseSettings();
             System.out.println("[Resurrection] Settings file created successfully.");
         } else {
@@ -94,20 +99,22 @@ public class Resurrection extends JavaPlugin implements Listener {
 
         System.out.println("[Resurrection] ---------------------------------------------------------");
 
-        System.out.println("[Resurrection] Registering listeners and adding commands...");
-        // register listener
-        this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
+        if (parseSettings.isSettingsComplete() && !fileFail) {
+            System.out.println("[Resurrection] Registering listeners and adding commands...");
+            // register listener
+            this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 
-        // register commands
-        this.getCommand("about").setExecutor(new CommandAbout(parseSettings.getSetting("debug"), pluginInfo.getVersion(), outdated));
-        this.getCommand("bug").setExecutor(new CommandBug(parseSettings.getSetting("debug")));
-        this.getCommand("resurrect").setExecutor(new CommandResurrect(parseSettings.getSetting("debug")));
-        this.getCommand("howlong").setExecutor(new CommandHowLong(parseSettings.getSetting("debug")));
-        this.getCommand("source").setExecutor(new CommandSource(parseSettings.getSetting("debug")));
+            // register commands
+            this.getCommand("about").setExecutor(new CommandAbout(parseSettings.getSetting("debug"), pluginInfo.getVersion(), outdated));
+            this.getCommand("bug").setExecutor(new CommandBug(parseSettings.getSetting("debug")));
+            this.getCommand("resurrect").setExecutor(new CommandResurrect(parseSettings.getSetting("debug")));
+            this.getCommand("howlong").setExecutor(new CommandHowLong(parseSettings.getSetting("debug")));
+            this.getCommand("source").setExecutor(new CommandSource(parseSettings.getSetting("debug")));
 
-        System.out.println("[Resurrection] ---------------------------------------------------------");
-        System.out.println("[Resurrection] Successfully Started!");
-        System.out.println("[Resurrection] ---------------------------------------------------------");
+            System.out.println("[Resurrection] ---------------------------------------------------------");
+            System.out.println("[Resurrection] Successfully Started!");
+            System.out.println("[Resurrection] ---------------------------------------------------------");
+        }
 
     }
 

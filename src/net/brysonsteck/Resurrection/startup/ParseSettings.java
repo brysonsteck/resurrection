@@ -104,4 +104,6 @@ public class ParseSettings {
     public String getSetting(String setting) {
         return settings.get(setting);
     }
+
+    public boolean isSettingsComplete() { return settingsComplete; }
 }
