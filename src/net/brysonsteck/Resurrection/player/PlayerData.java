@@ -62,7 +62,7 @@ public class PlayerData {
                 this.playerData.put(playerData[0], playerHash);
                 if (DEBUG) {
                     TimeCheck timeCheck = new TimeCheck(Long.parseLong(playerData[2]));
-                    Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: player: " + playerData[0] + " | dead: " + playerData[1] + " | ms to resurrect at: " + playerData[2]);
+                    Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: player: " + playerData[0].replaceFirst(";","") + " | dead: " + playerData[1] + " | ms to resurrect at: " + playerData[2]);
                 }
             }
         } catch (IOException e) {
