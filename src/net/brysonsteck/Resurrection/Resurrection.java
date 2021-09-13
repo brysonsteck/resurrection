@@ -5,6 +5,7 @@ import net.brysonsteck.Resurrection.player.PlayerListener;
 import net.brysonsteck.Resurrection.startup.CheckForUpdate;
 import net.brysonsteck.Resurrection.startup.ParseSettings;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -100,16 +101,43 @@ public class Resurrection extends JavaPlugin implements Listener {
         System.out.println("[Resurrection] ---------------------------------------------------------");
 
         if (parseSettings.isSettingsComplete() && !fileFail) {
+            boolean DEBUG = false;
+            if (Boolean.parseBoolean(parseSettings.getSetting("debug"))) {
+                DEBUG = true;
+                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Resurrection's debug mode has been enabled in the settings file.");
+                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: All debug messages will be broadcasted (sent to everyone) prefaced with the tag \"[Res. DEBUG]\" and sent in bold yellow text.");
+                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Several messages may be sent at a time. Therefore, debug mode should be disabled for anything other than, well, debugging.");
+                System.out.println("[Resurrection] ---------------------------------------------------------");
+            }
+
             System.out.println("[Resurrection] Registering listeners and adding commands...");
             // register listener
             this.getServer().getPluginManager().registerEvents(new PlayerListener(parseSettings), this);
+            if (DEBUG) {
+                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Player listener registered.");
+            }
 
             // register commands
             this.getCommand("about").setExecutor(new CommandAbout(parseSettings.getSetting("debug"), pluginInfo.getVersion(), outdated));
+            if (DEBUG) {
+                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: `/about` registered.");
+            }
             this.getCommand("bug").setExecutor(new CommandBug(parseSettings.getSetting("debug")));
+            if (DEBUG) {
+                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: `/bug` registered.");
+            }
             this.getCommand("resurrect").setExecutor(new CommandResurrect(parseSettings.getSetting("debug")));
+            if (DEBUG) {
+                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: `/resurrect` registered.");
+            }
             this.getCommand("howlong").setExecutor(new CommandHowLong(parseSettings.getSetting("debug")));
+            if (DEBUG) {
+                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: `/howlong` registered.");
+            }
             this.getCommand("source").setExecutor(new CommandSource(parseSettings.getSetting("debug")));
+            if (DEBUG) {
+                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: `/source` registered.");
+            }
 
             System.out.println("[Resurrection] ---------------------------------------------------------");
             System.out.println("[Resurrection] Successfully Started!");

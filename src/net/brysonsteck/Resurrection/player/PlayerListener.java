@@ -25,14 +25,20 @@ public class PlayerListener implements Listener {
     Location spawn = world.getSpawnLocation();
     Hashtable<String, Location> playerSpawns = new Hashtable<>();
     ParseSettings parseSettings;
+    boolean DEBUG;
 
     public PlayerListener(ParseSettings parseSettings) {
         this.parseSettings = parseSettings;
+        this.DEBUG = Boolean.parseBoolean(parseSettings.getSetting("debug"));
     }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
+        if (DEBUG) {
+            Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Player " + p.getDisplayName() + " has joined");
+        }
+
         PlayerData playerData = new PlayerData();
         playerData.readData();
         String rawData = playerData.getRawData();
@@ -43,12 +49,19 @@ public class PlayerListener implements Listener {
         long timeToResurrection = 0;
         for (String players : rawPlayers) {
             if (players.startsWith(p.getDisplayName())) {
+                if (DEBUG) {
+                    Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Player " + p.getDisplayName() + " was found in the player data");
+                }
                 found = true;
                 String[] playerSplit = players.split(",");
                 boolean dead = Boolean.parseBoolean(playerSplit[1]);
                 timeToResurrection = Long.parseLong(playerSplit[2]);
 
                 if (!dead) {
+                    if (DEBUG) {
+                        Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Player " + p.getDisplayName() + " is not dead; making sure they are in survival");
+                    }
+
                     for (PotionEffect effect : p.getActivePotionEffects())
                         p.removePotionEffect(effect.getType());
                     p.setGameMode(GameMode.SURVIVAL);
@@ -65,9 +78,16 @@ public class PlayerListener implements Listener {
             index++;
         }
         if (!found) {
+            if (DEBUG) {
+                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Player " + p.getDisplayName() + " was not found in the player data; registering");
+            }
+
             playerData.saveData(rawData + ";" + p.getDisplayName() + ",false,0");
         }
         if (resumeDeath && !timerRunning) {
+            if (DEBUG) {
+                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Player " + p.getDisplayName() + " is dead; pushing into dead state until resurrection");
+            }
 //            spawn = p.getLocation();
             p.sendMessage(ChatColor.RED + "You are still dead. To check how long you have left before you are resurrected, ");
             p.sendMessage(ChatColor.RED + "run the \"/howlong\" command in chat.");
@@ -91,6 +111,21 @@ public class PlayerListener implements Listener {
             new BukkitRunnable() {
                 @Override
                 public void run() {
+                    String rawData = playerData.getRawData();
+                    int index = 0;
+                    for (String players : rawPlayers) {
+                        if (players.startsWith(p.getDisplayName())) {
+                            String[] playerSplit = players.split(",");
+                            playerSplit[1] = "false";
+                            playerSplit[2] = "0";
+
+                            rawPlayers[index] = String.join(",", playerSplit);
+                            rawData = String.join(";", rawPlayers);
+                            playerData.saveData(rawData);
+                            break;
+                        }
+                        index++;
+                    }
                     stillDead = false;
                     for (PotionEffect effect : p.getActivePotionEffects())
                         p.removePotionEffect(effect.getType());
@@ -110,11 +145,16 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
-        System.out.println("[Resurrection] A player has died!");
         Player p = e.getEntity();
         stillDead = true;
+        if (DEBUG) {
+            Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Player " + p.getDisplayName() + " has died, reading resurrection_time in settings");
+        }
+
+        // get human readable form of resurrection time
         TimeCheck timeCheck = new TimeCheck(Long.parseLong(parseSettings.getSetting("resurrection_time")));
 
+        // calculate time that player will resurrect at
         long resurrectionTime = System.currentTimeMillis() + Long.parseLong(parseSettings.getSetting("resurrection_time"));
 
         e.setDeathMessage(e.getDeathMessage() + " and will respawn in the next " + timeCheck.formatTime('f'));

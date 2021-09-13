@@ -1,6 +1,7 @@
 package net.brysonsteck.Resurrection.commands;
 
 import net.brysonsteck.Resurrection.Resurrection;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,13 +11,23 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class CommandBug implements CommandExecutor {
+    boolean DEBUG;
 
     public CommandBug(String debug) {
+        this.DEBUG = Boolean.parseBoolean(debug);
     }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+        if (DEBUG) {
+            Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: The `/bug` command was ran by " + commandSender.getName());
+        }
+
         if (commandSender instanceof Player) {
+            if (DEBUG) {
+                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: CommandSender is a player.");
+            }
+
             commandSender.sendMessage(ChatColor.YELLOW + "Did you find a bug? Well that sucks for you.");
             new BukkitRunnable() {
                 @Override
@@ -30,6 +41,10 @@ public class CommandBug implements CommandExecutor {
             }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 60);
             return true;
         } else {
+            if (DEBUG) {
+                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: CommandSender is console");
+            }
+
             System.out.println("[Resurrection] Did you find a bug? Well that sucks for you.");
             new BukkitRunnable() {
                 @Override

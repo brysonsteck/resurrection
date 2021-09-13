@@ -8,24 +8,24 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class CommandAbout implements CommandExecutor {
-    boolean debug;
+    boolean DEBUG;
     String currentVersion;
     boolean outdated;
 
     public CommandAbout(String debug, String currentVersion, boolean outdated) {
-        this.debug = Boolean.parseBoolean(debug);
+        this.DEBUG = Boolean.parseBoolean(debug);
         this.currentVersion = currentVersion;
         this.outdated = outdated;
     }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (debug) {
+        if (DEBUG) {
             Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: The `/about` command was ran by " + commandSender.getName());
         }
 
         if (commandSender instanceof Player) {
-            if (debug) {
+            if (DEBUG) {
                 Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: CommandSender is a player.");
             }
             Player p = (Player) commandSender;
@@ -40,7 +40,7 @@ public class CommandAbout implements CommandExecutor {
             p.sendMessage(ChatColor.YELLOW + "For more info on this plugin or to download it, visit the GitHub repository at " + ChatColor.AQUA + "https://github.com/brysonsteck/resurrection");
             p.sendMessage(ChatColor.YELLOW + "\u00a9 2021 Bryson Steck");
         } else {
-            if (debug) {
+            if (DEBUG) {
                 Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: CommandSender is console.");
             }
             System.out.println("[Resurrection] --- Resurrection ---");
