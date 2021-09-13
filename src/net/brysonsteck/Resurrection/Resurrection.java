@@ -110,7 +110,7 @@ public class Resurrection extends JavaPlugin implements Listener {
                 System.out.println("[Resurrection] ---------------------------------------------------------");
             }
 
-            System.out.println("[Resurrection] Registering listeners and adding commands...");
+            System.out.println("[Resurrection] Essential files found and valid. Registering listeners and adding commands...");
             // register listener
             this.getServer().getPluginManager().registerEvents(new PlayerListener(parseSettings), this);
             if (DEBUG) {

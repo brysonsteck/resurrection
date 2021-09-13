@@ -33,11 +33,11 @@ public class PlayerData {
             System.out.println("[Resurrection] Resurrection will continue to run despite this error, but avoid shutting down the server until a successful save occurs.");
             System.out.println("[Resurrection] In the mean time, check to make sure the playerData file exists and you have permissions to write to it.");
         }
-        readData();
-
         if (DEBUG) {
-            Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Player data saved successfully");
+            Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Player data saved successfully, rereading data to ensure Resurrection is up to date");
         }
+
+        readData();
     }
 
     public void readData() {

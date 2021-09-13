@@ -139,6 +139,10 @@ public class PlayerListener implements Listener {
                     }
                 }
             }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), timeToResurrection);
+
+            if (DEBUG) {
+                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Player's resurrection thread is now delayed for (their time to resurrect - current time)");
+            }
         }
 
     }
@@ -169,6 +173,9 @@ public class PlayerListener implements Listener {
         int index = 0;
         for (String players : rawPlayers) {
             if (players.startsWith(p.getDisplayName())) {
+                if (DEBUG) {
+                    Bukkit.broadcastMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "[Res. DEBUG]: Player found in player data file, saving dead state");
+                }
                 String[] playerSplit = players.split(",");
                 playerSplit[1] = "true";
                 playerSplit[2] = String.valueOf(resurrectionTime);
@@ -187,7 +194,6 @@ public class PlayerListener implements Listener {
         timeToResurrection = timeToResurrection / 1000;
         // to ticks
         timeToResurrection = timeToResurrection * 20;
-
 
         new BukkitRunnable() {
             // save death information to player file
@@ -222,17 +228,28 @@ public class PlayerListener implements Listener {
                 }
             }
         }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), timeToResurrection);
+
+        if (DEBUG) {
+            Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Player's resurrection thread is now delayed for resurrection_time");
+        }
     }
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent e) {
         if (stillDead) {
             final Player p = e.getPlayer();
+            if (DEBUG) {
+                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Player " + p.getDisplayName() + " has respawned before their resurrection time");
+            }
+
             TimeCheck timeCheck = new TimeCheck(Long.parseLong(parseSettings.getSetting("resurrection_time")));
             playerSpawns.put(p.getDisplayName(), p.getLocation());
             p.setGameMode(GameMode.SPECTATOR);
             p.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "YOU HAVE DIED!!");
             p.sendMessage(ChatColor.RED + "You will be able to respawn in the next " + timeCheck.formatTime('f'));
+            if (DEBUG) {
+                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Applying potions, spectator mode");
+            }
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -252,6 +269,10 @@ public class PlayerListener implements Listener {
     public void onPlayerMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         if (p.getGameMode() == GameMode.SPECTATOR) {
+            if (DEBUG) {
+                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Player " + p.getDisplayName() + " attempted to move while in dead state, teleporting to spawn until their resurrection time");
+            }
+
             p.teleport(spawn);
         }
     }
