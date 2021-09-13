@@ -95,6 +95,7 @@ public class Resurrection extends JavaPlugin implements Listener {
             System.out.println("[Resurrection] Settings file created successfully.");
         } else {
             System.out.println("[Resurrection] The settings file has also been found!");
+            parseSettings = new ParseSettings();
         }
 
         System.out.println("[Resurrection] ---------------------------------------------------------");
