@@ -1,9 +1,8 @@
 package net.brysonsteck.Resurrection.player;
 
-import net.brysonsteck.Resurrection.ParseSettings;
+import net.brysonsteck.Resurrection.startup.ParseSettings;
 import net.brysonsteck.Resurrection.Resurrection;
 import org.bukkit.*;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

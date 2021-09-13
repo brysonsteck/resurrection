@@ -10,7 +10,7 @@ public class CommandAbout implements CommandExecutor {
     String currentVersion;
     boolean outdated;
 
-    public CommandAbout(String currentVersion, boolean outdated) {
+    public CommandAbout(String debug, String currentVersion, boolean outdated) {
         this.currentVersion = currentVersion;
         this.outdated = outdated;
     }

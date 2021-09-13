@@ -11,6 +11,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class CommandBug implements CommandExecutor {
 
+    public CommandBug(String debug) {
+    }
+
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player) {

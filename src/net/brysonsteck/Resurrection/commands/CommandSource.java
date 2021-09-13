@@ -10,6 +10,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class CommandSource implements CommandExecutor {
+    boolean debug;
+
+    public CommandSource(String debug) {
+        this.debug = Boolean.parseBoolean(debug);
+    }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {

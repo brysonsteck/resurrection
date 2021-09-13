@@ -11,6 +11,9 @@ import org.bukkit.entity.Player;
 
 public class CommandHowLong implements CommandExecutor {
 
+    public CommandHowLong(String debug) {
+    }
+
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player) {

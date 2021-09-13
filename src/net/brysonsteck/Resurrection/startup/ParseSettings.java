@@ -1,4 +1,4 @@
-package net.brysonsteck.Resurrection;
+package net.brysonsteck.Resurrection.startup;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -91,7 +91,7 @@ public class ParseSettings {
             failedSetting = "debug";
             return false;
         }
-        if (settings.get("debug").toLowerCase().contains("true") && settings.get("debug").toLowerCase().contains("false")) {
+        if (!settings.get("debug").toLowerCase().contains("true") && !settings.get("debug").toLowerCase().contains("false")) {
             failedSetting = "debug";
             return false;
         }

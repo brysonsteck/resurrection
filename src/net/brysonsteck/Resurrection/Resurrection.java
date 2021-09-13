@@ -2,9 +2,8 @@ package net.brysonsteck.Resurrection;
 
 import net.brysonsteck.Resurrection.commands.*;
 import net.brysonsteck.Resurrection.player.PlayerListener;
-import net.brysonsteck.Resurrection.player.TimeCheck;
 import net.brysonsteck.Resurrection.startup.CheckForUpdate;
-import org.bukkit.Bukkit;
+import net.brysonsteck.Resurrection.startup.ParseSettings;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -66,6 +65,8 @@ public class Resurrection extends JavaPlugin implements Listener {
 
         System.out.println("[Resurrection] ---------------------------------------------------------");
 
+        ParseSettings parseSettings = null;
+
         System.out.println("[Resurrection] Locating player data and settings files...");
         // check if playerData.resurrection exists
         File playerFile = new File("plugins/playerData.resurrection");
@@ -85,7 +86,7 @@ public class Resurrection extends JavaPlugin implements Listener {
         }
         if (!settingsFile.exists()) {
             System.out.println("[Resurrection] Settings file does not exist. (This file is new with the 0.2 beta if you upgraded.) Creating now in the \"plugins\" directory...");
-            ParseSettings parseSettings = new ParseSettings();
+            parseSettings = new ParseSettings();
             System.out.println("[Resurrection] Settings file created successfully.");
         } else {
             System.out.println("[Resurrection] The settings file has also been found!");
@@ -98,11 +99,11 @@ public class Resurrection extends JavaPlugin implements Listener {
         this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 
         // register commands
-        this.getCommand("about").setExecutor(new CommandAbout(pluginInfo.getVersion(), outdated));
-        this.getCommand("bug").setExecutor(new CommandBug());
-        this.getCommand("resurrect").setExecutor(new CommandResurrect());
-        this.getCommand("howlong").setExecutor(new CommandHowLong());
-        this.getCommand("source").setExecutor(new CommandSource());
+        this.getCommand("about").setExecutor(new CommandAbout(parseSettings.getSetting("debug"), pluginInfo.getVersion(), outdated));
+        this.getCommand("bug").setExecutor(new CommandBug(parseSettings.getSetting("debug")));
+        this.getCommand("resurrect").setExecutor(new CommandResurrect(parseSettings.getSetting("debug")));
+        this.getCommand("howlong").setExecutor(new CommandHowLong(parseSettings.getSetting("debug")));
+        this.getCommand("source").setExecutor(new CommandSource(parseSettings.getSetting("debug")));
 
         System.out.println("[Resurrection] ---------------------------------------------------------");
         System.out.println("[Resurrection] Successfully Started!");
@@ -111,6 +112,12 @@ public class Resurrection extends JavaPlugin implements Listener {
     }
 
     public static void main(String[] args) {
+
+//        String test = "fals";
+//
+//        if (!test.toLowerCase().contains("true") && !test.toLowerCase().contains("false")) {
+//            System.out.println("fail");
+//        }
 
         // DO THIS
 //        PlayerData playerData = new PlayerData();
