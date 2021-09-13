@@ -66,8 +66,6 @@ public class Resurrection extends JavaPlugin implements Listener {
 
         System.out.println("[Resurrection] ---------------------------------------------------------");
 
-        ParseSettings parseSettings = null;
-
         System.out.println("[Resurrection] Locating player data and settings files...");
         // check if playerData.resurrection exists
         File playerFile = new File("plugins/playerData.resurrection");
@@ -91,12 +89,13 @@ public class Resurrection extends JavaPlugin implements Listener {
         }
         if (!settingsFile.exists()) {
             System.out.println("[Resurrection] Settings file does not exist. Creating now in the \"plugins\" directory...");
-            parseSettings = new ParseSettings();
+            new ParseSettings();
             System.out.println("[Resurrection] Settings file created successfully.");
         } else {
             System.out.println("[Resurrection] The settings file has also been found!");
-            parseSettings = new ParseSettings();
         }
+
+        ParseSettings parseSettings = new ParseSettings();
 
         System.out.println("[Resurrection] ---------------------------------------------------------");
 
