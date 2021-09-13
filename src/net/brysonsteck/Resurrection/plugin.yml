@@ -1,7 +1,7 @@
 main: net.brysonsteck.Resurrection.Resurrection
 name: Resurrection
 author: 'Bryson Steck'
-version: '1.0'
+version: '1.1'
 commands:
   about:
     description: Displays information about Resurrection.
