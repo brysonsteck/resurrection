@@ -102,7 +102,7 @@ public class Resurrection extends JavaPlugin implements Listener {
         if (parseSettings.isSettingsComplete() && !fileFail) {
             System.out.println("[Resurrection] Registering listeners and adding commands...");
             // register listener
-            this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
+            this.getServer().getPluginManager().registerEvents(new PlayerListener(parseSettings), this);
 
             // register commands
             this.getCommand("about").setExecutor(new CommandAbout(parseSettings.getSetting("debug"), pluginInfo.getVersion(), outdated));

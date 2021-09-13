@@ -26,8 +26,8 @@ public class PlayerListener implements Listener {
     Hashtable<String, Location> playerSpawns = new Hashtable<>();
     ParseSettings parseSettings;
 
-    public PlayerListener() {
-        parseSettings = new ParseSettings();
+    public PlayerListener(ParseSettings parseSettings) {
+        this.parseSettings = parseSettings;
     }
 
     @EventHandler
