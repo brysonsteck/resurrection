@@ -1,13 +1,15 @@
 # Resurrection
 ![](https://brysonsteck.net/resurrection-sc.png)
 
-Resurrection is a Spigot/Bukkit Minecraft Server<sup>&dagger;</sup> plugin that forces players to wait a certain amount of time before rejoining the world. This allows for tactical planning for games such as faction survival and other PvP gamemodes as it can severely penalize an entire team if care is not taken.
+Resurrection is a Spigot/Bukkit Minecraft Server plugin that forces players to wait a certain amount of time before rejoining the world. This allows for tactical planning for games such as faction survival and other PvP gamemodes as it can severely penalize an entire team if care is not taken.
 
 Resurrection is intended to make players wait long amounts of time between death and respawn, preferably 24 hours minimum. Resurrection sets the time to be 24 hours by default. However, you can make players to wait any amount of time you wish, whether shorter or longer than the default 24 hours, but your experience with this plugin may be impacted.
 
 ## Compatibility 
 
-Tested Versions: 1.13, 1.14, 1.15, 1.16, 1.17
+Resurrection is only confirmed to run on vanilla Spigot or Bukkit servers, meaning you built the server yourself using `BuildTools` with no extra settings, or downloaded it from official sources such as their website. Resurrection is **NOT GUARANTEED** to run on **ANY** fork of Spigot/Bukkit servers, such as Tuinity or Paper. Issues reported involving these forks may not be provided a solution unless proven that the issue still happens on vanilla versions.
+
+Tested Minecraft Versions: 1.13, 1.14, 1.15, 1.16, 1.17
 
 Native Version: 1.16
 
@@ -62,6 +64,3 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ```
 
-<hr>
-
-&dagger; Spigot/Bukkit Minecraft Servers refer to vanilla Spigot or Bukkit servers, meaning you built the server yourself using `BuildTools` (using no other settings) or downloading it through their official website. Resurrection is **NOT GUARANTEED** to run on any fork of Spigot or Bukkit servers, such as Tuinity or Paper. Issues involving these forks may not be provided a solution.
