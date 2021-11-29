@@ -1,7 +1,11 @@
 main: net.brysonsteck.Resurrection.Resurrection
 name: Resurrection
 author: 'Bryson Steck'
-version: '1.1'
+version: '1.1.1'
+website: https://brysonsteck.net/resurrection.html
+description: Makes players wait large amounts of time before respawning!
+database: false
+
 commands:
   about:
     description: Displays information about Resurrection.
@@ -11,6 +15,7 @@ commands:
   howlong:
     description: Displays the remaining time before the player (or specified player) is resurrected.
     usage: /howlong [PLAYER_NAME]
+    aliases: [timeleft]
 
   resurrect:
     description: Manually resurrects a player.

@@ -23,7 +23,7 @@ public class PlayerListener implements Listener {
     boolean timerRunning = false;
     World world = Bukkit.getWorlds().get(0);
     Location spawn = world.getSpawnLocation();
-    Hashtable<String, Location> playerSpawns = new Hashtable<>();
+    //Hashtable<String, Location> playerSpawns = new Hashtable<>();
     ParseSettings parseSettings;
     boolean DEBUG;
 
@@ -136,6 +136,8 @@ public class PlayerListener implements Listener {
                     Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + p.getDisplayName() + " has resurrected!");
                     if (p.getBedSpawnLocation() != null) {
                         p.teleport(p.getBedSpawnLocation());
+                    } else {
+                        p.teleport(spawn);
                     }
                 }
             }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), timeToResurrection);
@@ -225,6 +227,8 @@ public class PlayerListener implements Listener {
                 Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + p.getDisplayName() + " has resurrected!");
                 if (p.getBedSpawnLocation() != null) {
                     p.teleport(p.getBedSpawnLocation());
+                } else {
+                    p.teleport(spawn);
                 }
             }
         }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), timeToResurrection);
@@ -243,7 +247,7 @@ public class PlayerListener implements Listener {
             }
 
             TimeCheck timeCheck = new TimeCheck(Long.parseLong(parseSettings.getSetting("resurrection_time")));
-            playerSpawns.put(p.getDisplayName(), p.getLocation());
+            //playerSpawns.put(p.getDisplayName(), p.getLocation());
             p.setGameMode(GameMode.SPECTATOR);
             p.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "YOU HAVE DIED!!");
             p.sendMessage(ChatColor.RED + "You will be able to respawn in the next " + timeCheck.formatTime('f'));
