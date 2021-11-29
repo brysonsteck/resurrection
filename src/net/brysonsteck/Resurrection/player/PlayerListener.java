@@ -130,14 +130,14 @@ public class PlayerListener implements Listener {
                     for (PotionEffect effect : p.getActivePotionEffects())
                         p.removePotionEffect(effect.getType());
                     p.setGameMode(GameMode.SURVIVAL);
-                    for(Player p : Bukkit.getOnlinePlayers()){
-                        p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
-                    }
                     Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + p.getDisplayName() + " has resurrected!");
                     if (p.getBedSpawnLocation() != null) {
                         p.teleport(p.getBedSpawnLocation());
                     } else {
                         p.teleport(spawn);
+                    }
+                    for(Player p : Bukkit.getOnlinePlayers()){
+                        p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
                     }
                 }
             }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), timeToResurrection);
@@ -221,14 +221,14 @@ public class PlayerListener implements Listener {
                 for (PotionEffect effect : p.getActivePotionEffects())
                     p.removePotionEffect(effect.getType());
                 p.setGameMode(GameMode.SURVIVAL);
-                for(Player p : Bukkit.getOnlinePlayers()){
-                    p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
-                }
                 Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + p.getDisplayName() + " has resurrected!");
                 if (p.getBedSpawnLocation() != null) {
                     p.teleport(p.getBedSpawnLocation());
                 } else {
                     p.teleport(spawn);
+                }
+                for(Player p : Bukkit.getOnlinePlayers()){
+                    p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
                 }
             }
         }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), timeToResurrection);
