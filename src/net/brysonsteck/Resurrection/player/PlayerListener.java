@@ -276,7 +276,6 @@ public class PlayerListener implements Listener {
             if (DEBUG) {
                 Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Player " + p.getDisplayName() + " attempted to move while in dead state, teleporting to spawn until their resurrection time");
             }
-
             p.teleport(spawn);
         }
     }

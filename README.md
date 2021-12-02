@@ -9,7 +9,7 @@ Resurrection is intended to make players wait long amounts of time between death
 
 Resurrection is only confirmed to run on vanilla Spigot or Bukkit servers, meaning you built the server yourself using `BuildTools` with no extra settings, or downloaded it from official sources such as their website. Resurrection is **NOT GUARANTEED** to run on **ANY** fork of Spigot/Bukkit servers, such as Tuinity or Paper. Issues reported involving these forks may not be provided a solution unless proven that the issue still happens on vanilla versions.
 
-Tested Minecraft Versions: 1.13, 1.14, 1.15, 1.16, 1.17
+Tested Minecraft Versions: 1.13, 1.14, 1.15, 1.16, 1.17, 1.18
 
 Native Version: 1.16
 
