@@ -57,7 +57,13 @@ public class PlayerListener implements Listener {
                 boolean dead = Boolean.parseBoolean(playerSplit[1]);
                 timeToResurrection = Long.parseLong(playerSplit[2]);
 
+                if (timeToResurrection < System.currentTimeMillis()) {
+                    dead = false;
+                    timeToResurrection = 0;
+                }
+
                 if (!dead) {
+
                     if (DEBUG) {
                         Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Player " + p.getDisplayName() + " is not dead; making sure they are in survival");
                     }
