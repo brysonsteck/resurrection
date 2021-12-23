@@ -59,7 +59,9 @@ public class PlayerListener implements Listener {
 
                 if (timeToResurrection < System.currentTimeMillis()) {
                     dead = false;
+                    playerSplit[1] = String.valueOf(dead);
                     timeToResurrection = 0;
+                    playerSplit[2] = String.valueOf(timeToResurrection);
                 }
 
                 if (!dead) {
