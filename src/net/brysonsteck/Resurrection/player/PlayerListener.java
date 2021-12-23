@@ -62,6 +62,7 @@ public class PlayerListener implements Listener {
                     playerSplit[1] = String.valueOf(dead);
                     timeToResurrection = 0;
                     playerSplit[2] = String.valueOf(timeToResurrection);
+                    Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + p.getDisplayName() + " has resurrected!");
                 }
 
                 if (!dead) {
