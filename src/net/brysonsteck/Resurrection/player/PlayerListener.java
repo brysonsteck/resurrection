@@ -15,8 +15,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.Hashtable;
-
 public class PlayerListener implements Listener {
 
     boolean stillDead;

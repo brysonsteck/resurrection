@@ -6,7 +6,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
 import java.util.Hashtable;
-import java.util.Locale;
 
 public class ParseSettings {
     Hashtable<String, String> settings = new Hashtable<>();
@@ -42,6 +41,7 @@ public class ParseSettings {
                     settings.put(setting[0], setting[1]);
                 }
             }
+            reader.close();
             if (!verifySettings()) {
                 System.out.println("[Resurrection] There is a syntax issue inside the Settings file:");
                 if (!settingsComplete) {
@@ -81,7 +81,7 @@ public class ParseSettings {
 
         // is resurrection_time a long?
         try {
-            long time = Long.parseLong(settings.get("resurrection_time"));
+            Long.parseLong(settings.get("resurrection_time"));
         } catch (NumberFormatException | NullPointerException e) {
             failedSetting = "resurrection_time";
             return false;
