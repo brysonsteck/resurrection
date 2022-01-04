@@ -1,13 +1,18 @@
 package net.brysonsteck.Resurrection.commands;
 
+import net.brysonsteck.Resurrection.Resurrection;
 import net.brysonsteck.Resurrection.player.PlayerData;
 import net.brysonsteck.Resurrection.player.TimeCheck;
+
+import java.util.logging.Logger;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class CommandHowLong implements CommandExecutor {
     boolean DEBUG;
@@ -18,6 +23,7 @@ public class CommandHowLong implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+        Logger log = JavaPlugin.getProvidingPlugin(Resurrection.class).getLogger();
         if (DEBUG) {
             Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: The `/howlong` command was ran by " + commandSender.getName());
         }
@@ -103,7 +109,7 @@ public class CommandHowLong implements CommandExecutor {
             boolean valid = false;
 
             if (strings.length == 0) {
-                System.out.println("[Resurrection] ERROR: The /howlong command requires the name of a player when ran through the console.");
+                log.warning("ERROR: The /howlong command requires the name of a player when ran through the console.");
                 return false;
             } else if (strings.length == 1) {
                 if (DEBUG) {
@@ -117,7 +123,7 @@ public class CommandHowLong implements CommandExecutor {
 
                 Player p = Bukkit.getPlayer(strings[0]);
                 if (p == null) {
-                    System.out.println("[Resurrection] ERROR: That player is not online/doesn't exist!");
+                    log.warning("ERROR: That player is not online/doesn't exist!");
                     return false;
                 }
 
@@ -141,16 +147,15 @@ public class CommandHowLong implements CommandExecutor {
 
                             TimeCheck timeCheck = new TimeCheck(resurrectionTime - currentTime);
 
-                            System.out.println("[Resurrection] " + p.getDisplayName() + " will respawn in " + timeCheck.formatTime('f'));
+                            log.info(p.getDisplayName() + " will respawn in " + timeCheck.formatTime('f'));
 
                             return true;
                         } else {
-                            System.out.println("[Resurrection] ERROR: " + p.getDisplayName() + " is not dead!");
+                            log.warning("ERROR: " + p.getDisplayName() + " is not dead!");
                             return false;
                         }
                     }
                 }
-                System.out.println("[Resurrection] ERROR: An error has occurred while trying to get time information. This is a bug in the program and not your fault.");
                 return false;
             }
         }

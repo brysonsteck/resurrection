@@ -1,6 +1,9 @@
 package net.brysonsteck.Resurrection.commands;
 
 import net.brysonsteck.Resurrection.Resurrection;
+
+import java.util.logging.Logger;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -19,6 +22,7 @@ public class CommandBug implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+        Logger log = JavaPlugin.getProvidingPlugin(Resurrection.class).getLogger();
         if (DEBUG) {
             Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: The `/bug` command was ran by " + commandSender.getName());
         }
@@ -45,15 +49,13 @@ public class CommandBug implements CommandExecutor {
                 Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: CommandSender is console");
             }
 
-            System.out.println("[Resurrection] Did you find a bug? Well that sucks for you.");
+            log.info("Did you find a bug? Well that sucks for you.");
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    System.out.println("[Resurrection] ");
-                    System.out.println("[Resurrection] Okay, fine. Maybe I'll tell you how to fix the problem. Hehe.");
-                    System.out.println("[Resurrection] You can either create an issue on GitHub here: https://github.com/brysonsteck/resurrection/issues");
-                    System.out.println("[Resurrection] OR you can fill out this Google Form if you don't know how to use GitHub: https://forms.gle/3gLmhMXowNyqKUGdA");
-                    System.out.println("[Resurrection] Please prepare to explain how the bug occurred regardless of how you report the bug to me.");
+                    log.info("");
+                    log.info("Okay, fine. Maybe I'll tell you how to fix the problem. Hehe.");
+                    log.info("You can either create an issue on GitHub here: https://github.com/brysonsteck/resurrection/issues OR you can fill out this Google Form if you don't know how to use GitHub. Please prepare to explain how the bug occurred regardless of how you report the bug to me: https://forms.gle/3gLmhMXowNyqKUGdA ");
                 }
             }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), 60);
             return true;

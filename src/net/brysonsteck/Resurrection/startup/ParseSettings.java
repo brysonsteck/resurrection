@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
 import java.util.Hashtable;
+import java.util.logging.Logger;
 
 public class ParseSettings {
     Hashtable<String, String> settings = new Hashtable<>();
@@ -15,6 +16,7 @@ public class ParseSettings {
     boolean valuesComplete;
 
     public ParseSettings() {
+        Logger log = JavaPlugin.getProvidingPlugin(Resurrection.class).getLogger();
         try {
             File settingsFile = new File("plugins/settings.resurrection");
             if (!settingsFile.exists()) {
@@ -43,25 +45,25 @@ public class ParseSettings {
             }
             reader.close();
             if (!verifySettings()) {
-                System.out.println("[Resurrection] There is a syntax issue inside the Settings file:");
+                log.severe("There is a syntax issue inside the Settings file:");
                 if (!settingsComplete) {
-                    System.out.println("[Resurrection]     The setting \"" + failedSetting + "\" is not present in the settings file.\n" +
-                            "[Resurrection]     Please double check the settings file to make sure the setting exists and a valid corresponding value is set.\n" +
-                            "[Resurrection]     Example: \"resurrection_time=86400000\"\n" +
-                            "[Resurrection]     Example: \"debug=false\"");
+                    log.severe("    The setting \"" + failedSetting + "\" is not present in the settings file.");
+                    log.severe("    Please double check the settings file to make sure the setting exists and a valid corresponding value is set.");
+                    log.severe("    Example: \"resurrection_time=86400000\"");
+                    log.severe("    Example: \"debug=false\"");
                 } else if (!valuesComplete) {
-                    System.out.println("[Resurrection]     The setting \"" + failedSetting + "\" contains an invalid or empty value.\n" +
-                            "[Resurrection]     Please double check the settings file to make sure that a valid value is set for this setting.\n" +
-                            "[Resurrection]     Example: \"resurrection_time=86400000\"\n" +
-                            "[Resurrection]     Example: \"debug=false\"");
+                    log.severe("The setting \"" + failedSetting + "\" contains an invalid or empty value.");
+                    log.severe("    Please double check the settings file to make sure that a valid value is set for this setting.");
+                    log.severe("    Example: \"resurrection_time=86400000\"");
+                    log.severe("    Example: \"debug=false\"");
                 }
-                System.out.println("[Resurrection] This file is crucial to Resurrection. Since the file is not complete, the plugin will now stop.");
+                log.severe("This file is crucial to Resurrection. Since the file is not complete, the plugin will now stop.");
                 Bukkit.getPluginManager().disablePlugin(JavaPlugin.getProvidingPlugin(Resurrection.class));
             }
         } catch (IOException e) {
-            System.out.println("[Resurrection] There was an issue reading the Settings file:");
+            log.severe("There was an issue reading the Settings file:");
             e.printStackTrace();
-            System.out.println("[Resurrection] This file is crucial to Resurrection. Since the file is not complete, the plugin will now stop.");
+            log.severe("This file is crucial to Resurrection. Since the file is not complete, the plugin will now stop.");
             Bukkit.getPluginManager().disablePlugin(JavaPlugin.getProvidingPlugin(Resurrection.class));
         }
     }

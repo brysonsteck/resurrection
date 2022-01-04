@@ -9,12 +9,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
 import java.util.Hashtable;
+import java.util.logging.Logger;
 
 public class PlayerData {
     Hashtable<String, Hashtable<String, String>> playerData = new Hashtable<>();
     String rawData;
     boolean DEBUG = Boolean.parseBoolean(new ParseSettings()
             .getSetting("debug"));
+    Logger log = JavaPlugin.getProvidingPlugin(Resurrection.class).getLogger();
 
     public void saveData(String write) {
         try {
@@ -28,10 +30,10 @@ public class PlayerData {
             if (DEBUG) {
                 Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Error occurred while trying to save player data, avoid shutting down the server");
             }
-            System.out.println("[Resurrection] There was an issue saving the player data file.");
+            log.warning("There was an issue saving the player data file.");
             e.printStackTrace();
-            System.out.println("[Resurrection] Resurrection will continue to run despite this error, but avoid shutting down the server until a successful save occurs.");
-            System.out.println("[Resurrection] In the mean time, check to make sure the playerData file exists and you have permissions to write to it.");
+            log.warning("Resurrection will continue to run despite this error, but avoid shutting down the server until a successful save occurs.");
+            log.warning("In the mean time, check to make sure the playerData file exists and you have permissions to write to it.");
         }
         if (DEBUG) {
             Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Player data saved successfully, rereading data to ensure Resurrection is up to date");
@@ -70,9 +72,9 @@ public class PlayerData {
                 Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Error occurred while trying to read player data. Resurrection is shutting down");
             }
 
-            System.out.println("[Resurrection] There was an issue reading the player data file.");
+            log.severe("There was an issue reading the player data file.");
             e.printStackTrace();
-            System.out.println("[Resurrection] This file is crucial to Resurrection. Since the file could not be read, the plugin will now stop.");
+            log.severe("This file is crucial to Resurrection. Since the file could not be read, the plugin will now stop.");
             Bukkit.getPluginManager().disablePlugin(JavaPlugin.getProvidingPlugin(Resurrection.class));
         }
         if (DEBUG) {

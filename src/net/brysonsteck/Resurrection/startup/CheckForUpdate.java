@@ -4,15 +4,21 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import org.bukkit.plugin.java.JavaPlugin;
+
+import net.brysonsteck.Resurrection.Resurrection;
+
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.logging.Logger;
 
 
 public class CheckForUpdate {
     boolean success;
     String version;
     String versionURL;
+    Logger log = JavaPlugin.getProvidingPlugin(Resurrection.class).getLogger();
 
     public CheckForUpdate() {
         try {
@@ -26,7 +32,7 @@ public class CheckForUpdate {
             versionURL = softwareObj.get("github-release").toString();
             success = true;
         } catch (IOException e) {
-            System.out.println("[Resurrection] An error has occurred while attempting to check for updates.");
+            log.warning("An error has occurred while attempting to check for updates.");
             e.printStackTrace();
         }
     }

@@ -5,13 +5,13 @@ import net.brysonsteck.Resurrection.player.PlayerListener;
 import net.brysonsteck.Resurrection.startup.CheckForUpdate;
 import net.brysonsteck.Resurrection.startup.ParseSettings;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 public class Resurrection extends JavaPlugin implements Listener {
 
@@ -19,180 +19,111 @@ public class Resurrection extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         super.onDisable();
-        System.out.println("[Resurrection] Resurrection has completed shutdown.");
+        Logger log = this.getLogger();
+        log.info("Resurrection has completed shutdown.");
     }
 
     @Override
     public void onEnable() {
+        Logger log = this.getLogger();
         super.onEnable();
-        System.out.println("[Resurrection] ---------------------------------------------------------");
+        log.info("---------------------------------------------------------");
 
-        System.out.println("[Resurrection] Resurrection is starting!");
+        log.info("Resurrection is starting!");
         PluginDescriptionFile pluginInfo = getDescription();
         getServer().getPluginManager().registerEvents(this, this);
 
         if (pluginInfo.getVersion().contains("beta")) {
             // beta message
-            System.out.println("[Resurrection] ---------------------------------------------------------");
-            System.out.println("[Resurrection]                       WARNING!!!!");
-            System.out.println("[Resurrection]      You are running a beta version of Resurrection!");
-            System.out.println("[Resurrection] ");
-            System.out.println("[Resurrection] This means that this plugin is early in development and");
-            System.out.println("[Resurrection] not completely finished, and as a result you may");
-            System.out.println("[Resurrection] experience unexpected doodads. Make sure that the plugin");
-            System.out.println("[Resurrection] is up-to-date for more features and bug fixes. The plugin");
-            System.out.println("[Resurrection] will now check for updates.");
-            System.out.println("[Resurrection] ---------------------------------------------------------");
+            log.warning("---------------------------------------------------------");
+            log.warning("WARNING!!!!");
+            log.warning("You are running a beta version of Resurrection!");
+            log.warning("");
+            log.warning("This means that this plugin is early in development and not completely finished, and as a result you may experience unexpected doodads. Make sure that the plugin is up-to-date for more features and bug fixes. The plugin will now check for updates.");
+            log.warning("---------------------------------------------------------");
         } else {
-            System.out.println("[Resurrection] ---------------------------------------------------------");
+            log.info("---------------------------------------------------------");
 
         }
 
         // check for updates
-        System.out.println("[Resurrection] Checking for updates...");
+        log.info("Checking for updates...");
         CheckForUpdate check = new CheckForUpdate();
         boolean outdated = false;
         if (check.isSuccess()) {
             String newestVersion = check.getVersion();
             String newestVersionURL = check.getVersionURL();
             if (pluginInfo.getVersion().equals(newestVersion)) {
-                System.out.println("[Resurrection] " + newestVersion + " is the latest version of Resurrection.");
+                log.info(newestVersion + " is the latest version of Resurrection.");
             } else {
-                System.out.println("[Resurrection] A new version of Resurrection is available! (current: " + pluginInfo.getVersion() + ", newest: " + newestVersion + ")");
-                System.out.println("[Resurrection] You can download the latest release on GitHub here \\/");
-                System.out.println("[Resurrection] " + newestVersionURL);
+                log.info("A new version of Resurrection is available! (current: " + pluginInfo.getVersion() + ", newest: " + newestVersion + ")");
+                log.info("You can download the latest release on GitHub here \\/");
+                log.info(newestVersionURL);
                 outdated = true;
             }
         }
 
-        System.out.println("[Resurrection] ---------------------------------------------------------");
+        log.info("---------------------------------------------------------");
 
-        System.out.println("[Resurrection] Locating player data and settings files...");
+        log.info("Locating player data and settings files...");
         // check if playerData.resurrection exists
         File playerFile = new File("plugins/playerData.resurrection");
         File settingsFile = new File("plugins/settings.resurrection");
 
         boolean fileFail = false;
         if (!playerFile.exists()) {
-            System.out.println("[Resurrection] Player data file does not exist. Creating now in the \"plugins\" directory...");
+            log.info("Player data file does not exist. Creating now in the \"plugins\" directory...");
             try {
                 playerFile.createNewFile();
-                System.out.println("[Resurrection] Player data file created successfully.");
+                log.info("Player data file created successfully.");
             } catch (IOException e) {
-                System.out.println("[Resurrection] An error has occurred creating the player data file!");
+                log.severe("An error has occurred creating the player data file!");
                 e.printStackTrace();
-                System.out.println("[Resurrection] This file is crucial to Resurrection. Since the file could not be created, the plugin will now stop.");
+                log.severe("This file is crucial to Resurrection. Since the file could not be created, the plugin will now stop.");
                 Bukkit.getPluginManager().disablePlugin(this);
                 fileFail = true;
             }
         } else {
-            System.out.println("[Resurrection] The player data file has been found!");
+            log.info("The player data file has been found!");
         }
         if (!settingsFile.exists()) {
-            System.out.println("[Resurrection] Settings file does not exist. Creating now in the \"plugins\" directory...");
+            log.info("Settings file does not exist. Creating now in the \"plugins\" directory...");
             new ParseSettings();
-            System.out.println("[Resurrection] Settings file created successfully.");
+            log.info("Settings file created successfully.");
         } else {
-            System.out.println("[Resurrection] The settings file has also been found!");
+            log.info("The settings file has also been found!");
         }
 
         ParseSettings parseSettings = new ParseSettings();
 
-        System.out.println("[Resurrection] ---------------------------------------------------------");
+        log.info("---------------------------------------------------------");
 
         if (parseSettings.isSettingsComplete() && !fileFail) {
-            boolean DEBUG = false;
             if (Boolean.parseBoolean(parseSettings.getSetting("debug"))) {
-                DEBUG = true;
-                System.out.println("[Res. DEBUG]: *****        DEBUG MODE ENABLED        *****");
-                System.out.println("[Res. DEBUG]: Resurrection's debug mode has been enabled in the settings file.");
-                System.out.println("[Res. DEBUG]: All debug messages after this disclaimer will be broadcasted (sent to everyone) prefaced with the tag \"[Res. DEBUG]\" and sent in bold yellow text.");
-                System.out.println("[Res. DEBUG]: Several messages may be sent at a time. Therefore, debug mode should be disabled for anything other than, well, debugging.");
-                System.out.println("[Resurrection] ---------------------------------------------------------");
+                log.warning("[Res. DEBUG]: DEBUG MODE ENABLED!");
+                log.warning("[Res. DEBUG]: Resurrection's debug mode has been enabled in the settings file. All debug messages after this disclaimer will be broadcasted (sent to everyone) prefaced with the tag \"[Res. DEBUG]\" and sent in bold yellow text. Several messages may be sent at a time. Therefore, debug mode should be disabled for anything other than, well, debugging.");
+                log.warning("---------------------------------------------------------");
             }
 
-            System.out.println("[Resurrection] Essential files found and valid. Registering listeners and adding commands...");
+            log.info("Essential files found and valid. Registering listeners and adding commands...");
             // register listener
             this.getServer().getPluginManager().registerEvents(new PlayerListener(parseSettings), this);
-            if (DEBUG) {
-                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: Player listener registered.");
-            }
 
             // register commands
             this.getCommand("about").setExecutor(new CommandAbout(parseSettings.getSetting("debug"), pluginInfo.getVersion(), outdated));
-            if (DEBUG) {
-                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: `/about` registered.");
-            }
             this.getCommand("bug").setExecutor(new CommandBug(parseSettings.getSetting("debug")));
-            if (DEBUG) {
-                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: `/bug` registered.");
-            }
             this.getCommand("resurrect").setExecutor(new CommandResurrect(parseSettings.getSetting("debug")));
-            if (DEBUG) {
-                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: `/resurrect` registered.");
-            }
             this.getCommand("howlong").setExecutor(new CommandHowLong(parseSettings.getSetting("debug")));
-            if (DEBUG) {
-                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: `/howlong` registered.");
-            }
             this.getCommand("source").setExecutor(new CommandSource(parseSettings.getSetting("debug")));
-            if (DEBUG) {
-                Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: `/source` registered.");
-            }
+            this.getCommand("dead").setExecutor(new CommandDead(parseSettings.getSetting("debug")));
 
-            System.out.println("[Resurrection] ---------------------------------------------------------");
-            System.out.println("[Resurrection] Successfully Started!");
-            System.out.println("[Resurrection] ---------------------------------------------------------");
+            log.info("---------------------------------------------------------");
+            log.info("Successfully Started!");
+            log.info("---------------------------------------------------------");
         }
 
     }
 
-    public static void main(String[] args) {
-
-//        String test = "fals";
-//
-//        if (!test.toLowerCase().contains("true") && !test.toLowerCase().contains("false")) {
-//            System.out.println("fail");
-//        }
-
-        // DO THIS
-//        PlayerData playerData = new PlayerData();
-//        System.out.println("--- Reading Player data file ---");
-//        playerData.readData();
-//        System.out.println(playerData.getPlayers());
-//        System.out.println(playerData.getRawData());
-//        System.out.println("--- Oh look! A new player joined. Adding them. ---");
-//        String rawData = playerData.getRawData();
-//        rawData = rawData + ";bryzinga,false,0";
-//        playerData.saveData(rawData);
-//        System.out.println(playerData.getPlayers());
-//        System.out.println(playerData.getRawData());
-//        System.out.println("--- A player has died! Update the data file! ---");
-//        rawData = playerData.getRawData();
-//        String[] rawPlayers = rawData.split(";");
-//        String[] rawSinglePlayer = new String[3];
-//        int index = 0;
-//        for (String players : rawPlayers) {
-//            if (players.startsWith("bryzinga")) {
-//                String[] playerSplit = players.split(",");
-//                playerSplit[1] = "true";
-//                playerSplit[2] = "12345";
-//
-//                rawPlayers[index] = String.join(",", playerSplit);
-//                break;
-//
-//            }
-//            index++;
-//        }
-//        rawData = String.join(";", rawPlayers);
-//        playerData.saveData(rawData);
-//        System.out.println(rawData);
-//        String[] array = ";bryzinga,false,0".split(";");
-//        System.out.println(array.length);
-
-//        TimeCheck timeCheck = new TimeCheck((System.currentTimeMillis() + 86212345) - System.currentTimeMillis());
-//        System.out.println(timeCheck.formatTime());
-//        System.out.println(System.currentTimeMillis());
-    }
+    public static void main(String[] args) {}
 
 }

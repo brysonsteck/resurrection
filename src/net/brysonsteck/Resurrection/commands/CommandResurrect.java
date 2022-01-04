@@ -1,6 +1,10 @@
 package net.brysonsteck.Resurrection.commands;
 
+import net.brysonsteck.Resurrection.Resurrection;
 import net.brysonsteck.Resurrection.player.PlayerData;
+
+import java.util.logging.Logger;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -9,6 +13,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 
 public class CommandResurrect implements CommandExecutor {
@@ -20,6 +25,7 @@ public class CommandResurrect implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+        Logger log = JavaPlugin.getProvidingPlugin(Resurrection.class).getLogger();
         if (DEBUG) {
             Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: The `resurrect` command was ran by " + commandSender.getName());
         }
@@ -72,7 +78,7 @@ public class CommandResurrect implements CommandExecutor {
                     return false;
                 }
             } else {
-                System.out.println(ChatColor.RED + "ERROR: Too few arguments!");
+                p.sendMessage(ChatColor.RED + "ERROR: Too few arguments!");
                 return false;
             }
         } else {
@@ -87,7 +93,7 @@ public class CommandResurrect implements CommandExecutor {
 
                 Player resurrectPlayer = Bukkit.getPlayer(strings[0]);
                 if (resurrectPlayer == null) {
-                    System.out.println("[Resurrection] ERROR: That player is not online/doesn't exist! Failed to resurrect.");
+                    log.warning("ERROR: That player is not online/doesn't exist! Failed to resurrect.");
                     return false;
                 }
                 if (DEBUG) {
@@ -115,11 +121,11 @@ public class CommandResurrect implements CommandExecutor {
                     }
                     return true;
                 } else {
-                    System.out.println("[Resurrection] ERROR: " + strings[0] + " is not dead! Failed to resurrect.");
+                    log.warning("ERROR: " + strings[0] + " is not dead! Failed to resurrect.");
                     return false;
                 }
             } else {
-                System.out.println("[Resurrection] ERROR: Too few arguments!");
+                log.warning("ERROR: Too few arguments!");
                 return false;
             }
         }

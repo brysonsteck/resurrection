@@ -30,3 +30,7 @@ commands:
   source:
     description: Displays info about the source code of Resurrection.
     usage: /source
+  
+  dead:
+    description: Displays all players who are awaiting resurrection.
+    usage: /dead
