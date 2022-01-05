@@ -61,7 +61,12 @@ public class CommandResurrect implements CommandExecutor {
                         resurrectPlayer.removePotionEffect(effect.getType());
                     resurrectPlayer.setGameMode(GameMode.SURVIVAL);
                     for(Player player : Bukkit.getOnlinePlayers()){
-                        player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
+                        try {
+                            player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
+                        } catch (NoSuchFieldError e) {
+                            log.warning("NoSuchFieldError encountered, playing Wither noise instead.");
+                            player.playSound(player.getLocation(), Sound.ENTITY_WITHER_DEATH, 1, 0);
+                        }
                     }
                     Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + strings[0] + " has been resurrected manually by an admin!");
                     removeDeath(resurrectPlayer);
@@ -108,7 +113,12 @@ public class CommandResurrect implements CommandExecutor {
                         resurrectPlayer.removePotionEffect(effect.getType());
                     resurrectPlayer.setGameMode(GameMode.SURVIVAL);
                     for(Player player : Bukkit.getOnlinePlayers()){
-                        player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
+                        try {
+                            player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
+                        } catch (NoSuchFieldError e) {
+                            log.warning("NoSuchFieldError encountered, playing Wither noise instead.");
+                            player.playSound(player.getLocation(), Sound.ENTITY_WITHER_DEATH, 1, 0);
+                        }
                     }
                     Bukkit.broadcastMessage(strings[0] + " has been resurrected manually by an admin!");
                     removeDeath(resurrectPlayer);

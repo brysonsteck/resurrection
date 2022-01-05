@@ -2,6 +2,9 @@ package net.brysonsteck.Resurrection.player;
 
 import net.brysonsteck.Resurrection.startup.ParseSettings;
 import net.brysonsteck.Resurrection.Resurrection;
+
+import java.util.logging.Logger;
+
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,6 +27,7 @@ public class PlayerListener implements Listener {
     //Hashtable<String, Location> playerSpawns = new Hashtable<>();
     ParseSettings parseSettings;
     boolean DEBUG;
+    Logger log = JavaPlugin.getProvidingPlugin(Resurrection.class).getLogger();
 
     public PlayerListener(ParseSettings parseSettings) {
         this.parseSettings = parseSettings;
@@ -55,7 +59,7 @@ public class PlayerListener implements Listener {
                 boolean dead = Boolean.parseBoolean(playerSplit[1]);
                 timeToResurrection = Long.parseLong(playerSplit[2]);
 
-                if (timeToResurrection < System.currentTimeMillis()) {
+                if (timeToResurrection < System.currentTimeMillis() && timeToResurrection != 0) {
                     dead = false;
                     playerSplit[1] = String.valueOf(dead);
                     timeToResurrection = 0;
@@ -144,7 +148,12 @@ public class PlayerListener implements Listener {
                         p.teleport(spawn);
                     }
                     for(Player p : Bukkit.getOnlinePlayers()){
-                        p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
+                        try {
+                            p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
+                        } catch (NoSuchFieldError e) {
+                            log.warning("NoSuchFieldError encountered, playing Wither noise instead.");
+                            p.playSound(p.getLocation(), Sound.ENTITY_WITHER_DEATH, 1, 0);
+                        }
                     }
                 }
             }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), timeToResurrection);
@@ -235,7 +244,12 @@ public class PlayerListener implements Listener {
                     p.teleport(spawn);
                 }
                 for(Player p : Bukkit.getOnlinePlayers()){
-                    p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
+                    try {
+                        p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
+                    } catch (NoSuchFieldError e) {
+                        log.warning("NoSuchFieldError encountered, playing Wither noise instead.");
+                        p.playSound(p.getLocation(), Sound.ENTITY_WITHER_DEATH, 1, 0);
+                    }
                 }
             }
         }.runTaskLater(JavaPlugin.getProvidingPlugin(Resurrection.class), timeToResurrection);
