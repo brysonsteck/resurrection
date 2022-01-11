@@ -149,10 +149,10 @@ public class PlayerListener implements Listener {
                     }
                     for(Player p : Bukkit.getOnlinePlayers()){
                         try {
-                            p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
+                            p.playSound(p.getLocation(), Sound.ENTITY_ENDERDRAGON_GROWL, 1, 0);
                         } catch (NoSuchFieldError e) {
                             log.warning("NoSuchFieldError encountered, playing Wither noise instead.");
-                            p.playSound(p.getLocation(), Sound.ENTITY_WITHER_DEATH, 1, 0);
+                            p.playSound(p.getLocation(), Sound.WITHER_DEATH, 1, 0);
                         }
                     }
                 }
@@ -245,10 +245,10 @@ public class PlayerListener implements Listener {
                 }
                 for(Player p : Bukkit.getOnlinePlayers()){
                     try {
-                        p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 0);
+                        p.playSound(p.getLocation(), Sound.ENTITY_ENDERDRAGON_GROWL, 1, 0);
                     } catch (NoSuchFieldError e) {
                         log.warning("NoSuchFieldError encountered, playing Wither noise instead.");
-                        p.playSound(p.getLocation(), Sound.ENTITY_WITHER_DEATH, 1, 0);
+                        p.playSound(p.getLocation(), Sound.WITHER_DEATH, 1, 0);
                     }
                 }
             }

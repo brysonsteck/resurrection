@@ -48,7 +48,7 @@ All files in this repository are subject to copyright under the GNU Affero Gener
 
 ```
 Resurrection is a Minecraft plugin that forces players to wait long amounts of time before respawning.
-Copyright (C) 2021 Bryson Steck
+Copyright (C) 2021-2022 Bryson Steck
 
 Resurrection is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as
