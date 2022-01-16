@@ -9,11 +9,11 @@ Resurrection is intended to make players wait long amounts of time between death
 
 Resurrection is only confirmed to run on vanilla Spigot or Bukkit servers, meaning you built the server yourself using `BuildTools` with no extra settings, or downloaded it from official sources such as their website. Resurrection is **NOT GUARANTEED** to run on **ANY** fork of Spigot/Bukkit servers, such as Tuinity or Paper. Issues reported involving these forks may not be provided a solution unless proven that the issue still happens on vanilla versions.
 
-Tested Minecraft Versions: 1.13, 1.14, 1.15, 1.16, 1.17, 1.18
+Tested Minecraft Versions: 1.8<sup>*</sup>, 1.9, 1.10, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18
 
 Native Version: 1.16
 
-You can keep track of compatibility with other versions by viewing my [TODO list.](TODO.md)
+<sup>*</sup>For Minecraft Servers version 1.8, you must download a special build of Resurrection in order for the plugin to work properly. These files are in the [releases](https://github.com/brysonsteck/resurrection/releases) as `Resurrection_1.8.jar` (for versions of Resurrection > 1.3).
 
 ## Commands
 
@@ -21,6 +21,8 @@ You can keep track of compatibility with other versions by viewing my [TODO list
     * Displays information about the plugin, including links to download, and also warns the command-runner if the plugin is outdated. 
 * `/bug`
     * Displays contact information in case a bug occurs, such as links to the GitHub issues page and the Google Form.
+* `/dead`
+    * Displays all the players currently awaiting resurrection and how long they have left. 
 * `/howlong [PLAYER]`
     * Shows the player how long they (or the specified player) have until they are resurrected.
     * This command requires a player to be specified when ran from the console. 

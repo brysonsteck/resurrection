@@ -6,3 +6,4 @@ lib/
 .gradle/
 .vscode/
 *.jar
+/builds
