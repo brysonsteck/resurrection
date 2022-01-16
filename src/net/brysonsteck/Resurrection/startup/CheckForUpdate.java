@@ -18,6 +18,7 @@ public class CheckForUpdate {
     boolean success;
     String version;
     String versionURL;
+    String message;
     Logger log = JavaPlugin.getProvidingPlugin(Resurrection.class).getLogger();
 
     public CheckForUpdate() {
@@ -30,6 +31,7 @@ public class CheckForUpdate {
             version = softwareObj.get("current-release").toString();
             version = version.replace("\"", "");
             versionURL = softwareObj.get("github-release").toString();
+            message = softwareObj.get("message").toString();
             success = true;
         } catch (IOException e) {
             log.warning("An error has occurred while attempting to check for updates.");
@@ -63,5 +65,9 @@ public class CheckForUpdate {
 
     public String getVersion() {
         return version;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

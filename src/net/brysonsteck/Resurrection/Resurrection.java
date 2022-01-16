@@ -67,14 +67,20 @@ public class Resurrection extends JavaPlugin implements Listener {
             if (check.isSuccess()) {
                 String newestVersion = check.getVersion();
                 String newestVersionURL = check.getVersionURL();
+                String message = check.getMessage();
                 if (pluginInfo.getVersion().equals(newestVersion)) {
                     log.info(newestVersion + " is the latest version of Resurrection.");
-               } else {
-                   log.info("A new version of Resurrection is available! (current: " + pluginInfo.getVersion() + ", newest: " + newestVersion + ")");
-                   log.info("You can download the latest release on GitHub here \\/");
-                   log.info(newestVersionURL);
-                  outdated = true;
-               }
+                } else {
+                    log.info("A new version of Resurrection is available! (current: " + pluginInfo.getVersion() + ", newest: " + newestVersion + ")");
+                    log.info("You can download the latest release on GitHub here \\/");
+                    log.info(newestVersionURL);
+                    outdated = true;
+                }
+                if (!message.equals("\"\"")) {
+                    log.info("---------------------------------------------------------");
+                    log.warning("A message from the developer has been sent from the update server: " + message);
+                }
+
             }
 
             log.info("---------------------------------------------------------");
