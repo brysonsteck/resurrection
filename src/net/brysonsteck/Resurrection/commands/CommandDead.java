@@ -25,7 +25,7 @@ public class CommandDead implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         Logger log = JavaPlugin.getProvidingPlugin(Resurrection.class).getLogger();
         if (DEBUG) {
-            Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: The `/about` command was ran by " + commandSender.getName());
+            Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + "[Res. DEBUG]: The `/dead` command was ran by " + commandSender.getName());
         }
 
         PlayerData playerData = new PlayerData();

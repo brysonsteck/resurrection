@@ -64,7 +64,7 @@ public class CommandResurrect implements CommandExecutor {
                         // for versions > 1.8
                         player.playSound(player.getLocation(), Sound.ENTITY_WITHER_DEATH, 1, 0);
                         // for version 1.8 
-                        //player.playSound(player.getLocation(), Sound.WITHER_DEATH, 1, 0);
+                        // player.playSound(player.getLocation(), Sound.WITHER_DEATH, 1, 0);
                     }
                     Bukkit.broadcastMessage(ChatColor.YELLOW  +""+ ChatColor.BOLD + strings[0] + " has been resurrected manually by an admin!");
                     removeDeath(resurrectPlayer);
@@ -114,7 +114,7 @@ public class CommandResurrect implements CommandExecutor {
                         // for versions > 1.8
                         player.playSound(player.getLocation(), Sound.ENTITY_WITHER_DEATH, 1, 0);
                         // for version 1.8 
-                        //player.playSound(player.getLocation(), Sound.WITHER_DEATH, 1, 0);
+                        // player.playSound(player.getLocation(), Sound.WITHER_DEATH, 1, 0);
                     }
                     Bukkit.broadcastMessage(strings[0] + " has been resurrected manually by an admin!");
                     removeDeath(resurrectPlayer);
