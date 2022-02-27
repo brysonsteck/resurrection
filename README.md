@@ -13,7 +13,7 @@ Tested Minecraft Versions: 1.8<sup>*</sup>, 1.9, 1.10, 1.12, 1.13, 1.14, 1.15, 1
 
 Native Version: 1.16
 
-<sup>*</sup>For Minecraft Servers version 1.8, you must download a special build of Resurrection in order for the plugin to work properly. These files are in the [releases](https://github.com/brysonsteck/resurrection/releases) as `Resurrection_1.8.jar` (for versions of Resurrection > 1.3).
+<sup>*</sup>For Minecraft Servers version 1.8, you must download a special build of Resurrection in order for the plugin to work properly. These files are in the [releases](https://github.com/brysonsteck/resurrection/releases) as `Resurrection_mc1.8.jar` (for versions of Resurrection > 1.3).
 
 ## Commands
 
