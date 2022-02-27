@@ -7,3 +7,4 @@ lib/
 .vscode/
 *.jar
 /builds
+convert-1.8.md
