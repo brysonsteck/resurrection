@@ -2,9 +2,9 @@ The following applies to all files in this directory with the exception of `resu
 
 # Example Files
 
-These files are crucial to Resurrection as they contain important timing data and resources for the plugin. 
+This directory contains sample files for you to visualize what files Resurrection writes to the file system and how they work. Resurrection creates these files in the same directory as the Spigot server `plugins` directory when the plugin is enabled for the first time or if the files do not exist.
 
-This directory contains sample files for you to visualize what these files will/may contain. The plugin creates these files in the same directory as the Spigot server `plugins` directory.
+**The files in this directory are purely for documentation purposes, they are not compiled into the final jars since Resurrection creates these files programmatically.**
 
 Avoid touching these files while the plugin is enabled and avoid deleting or moving the files at any time after it's creation to prevent breaking the plugin.
 
