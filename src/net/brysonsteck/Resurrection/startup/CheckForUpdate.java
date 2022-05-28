@@ -40,7 +40,7 @@ public class CheckForUpdate {
     }
 
     public String urlReader() throws IOException {
-        URL website = new URL("https://brysonsteck.net/updates.json");
+        URL website = new URL("https://brysonsteck.xyz/updates");
         URLConnection connection = website.openConnection();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(
